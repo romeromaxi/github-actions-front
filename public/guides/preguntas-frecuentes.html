@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preguntas Frecuentes</title>
+  <link rel="stylesheet" href="/guides/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<script>
+  function navigateTo(page) {
+    window.parent.postMessage({ type: 'navigate-instructivo-ayuda', page }, '*');
+  }
+
+  function notifyHeight() {
+    const height = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'resize-iframe-ayuda', height }, '*');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    notifyHeight();
+
+    document.querySelectorAll('a[href$=".html"]').forEach((link) => {
+      const href = link.getAttribute('href');
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        navigateTo(href);
+      });
+    });
+
+    document.querySelectorAll('a[id^="verVideo"]').forEach((link) => {
+      const srcVideo = link.getAttribute('src');
+      const titleVideo = link.getAttribute('title');
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        window.parent.postMessage({
+          type: 'open-video', 
+          videoId: srcVideo, 
+          videoTitle: titleVideo 
+        }, '*');
+      });
+    });
+    
+    const resizeObserver = new ResizeObserver(() => {
+      notifyHeight();
+    });
+    resizeObserver.observe(document.body);
+
+
+    setTimeout(notifyHeight, 1000);
+  });
+
+  window.addEventListener('load', notifyHeight);
+</script>
+
+<body>
+<!--  <header>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="que-es-luc.html">¿Qué es LUC?</a></li>
+        <li><a href="soluciones.html">Soluciones LUC</a></li>
+        <li><a class="nav-links-selected" href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+        <li><a href="instructivos.html">Instructivos</a></li>
+        <li><a href="contacto.html">Contactanos</a></li>
+      </ul>
+    </nav>
+  </header>-->
+  <main style="padding-top: 0px">
+    <section class="contenido">
+      <h6 class="submain-title">¿Alguna duda?</h6>
+      <h1 class="main-title">Preguntas Frecuentes</h1>
+      <div class="faq-buscador">
+        <input type="text" id="faqSearch" placeholder="Buscar pregunta...">
+      </div>
+      <nav class="faq-indice" id="faqIndice">
+        <ul>
+          <li><a href="#todas">Todas</a></li>
+          <li><a href="#tema1">Usuario</a></li>
+          <li><a href="#tema2">Cuenta Empresa</a></li>
+          <li><a href="#tema3">Acceso, Roles y Privacidad</a></li>
+          <li><a href="#tema4">Enviar una Solicitud</a></li>
+          <li><a href="#tema5">Soluciones LUC</a></li>
+        </ul>
+      </nav>
+      <div class="faq-main" id="faqMain">
+        <section id="tema1" style="scroll-margin-top: 110px;">
+          <h3>Usuario</h3>
+            <div class="faq-item" id="faq1">
+              <button class="faq-pregunta">¿Qué es un usuario en LUC?</button>
+              <div class="faq-respuesta">
+                Dar de alta un usuario es lo que te permite comenzar a aprovechar las funcionalidades generales de LUC. El usuario debe estar vinculado con una persona Humana y para darlo de alta tenés que ser mayor de edad con DNI Argentino.
+              </div>
+            </div>
+            <div class="faq-item" id="faq2">
+              <button class="faq-pregunta">¿Cómo doy de alta un usuario en LUC?</button>
+              <div class="faq-respuesta">
+                <div class="video-img-der-container">
+                  <div class="video-respuesta-texto">
+                    1. Hacé click en el ícono "Registrate" y luego seleccioná "Soy Nuevo".<br>
+                    2. Ingresá tu e-mail, CUIT, teléfono celular y contraseña.<br>
+                    3. Ingresá los pines que te van a llegar por mail y por SMS.<br>
+                    4. Listo, ya tenés tu usuario LUC.<br>
+                    <span style="display:block; margin-top:1em;">Si te quedaste con alguna duda 
+                      <a href="#" id="verVideoAltaUsuario"
+                         title="¿Cómo doy de alta un usuario en LUC?"
+                         src="https://www.youtube.com/embed/qLS2qKC7ypU"
+                         style="color:#1e3a5c; text-decoration:underline; font-weight:600;">
+                        mirá este video</a>.</span>
+                  </div>
+                  <!-- Imagen eliminada -->
+                </div>
+              </div>
+            </div>
+            <div class="faq-item" id="faq3">
+              <button class="faq-pregunta">¿Puedo ver las líneas ofrecidas sin tener un usuario?</button>
+              <div class="faq-respuesta">
+                Sí. Pero para realizar búsquedas mediante los filtros de la tienda o marcar alguna línea como favorita necesitarás dar de alta un usuario. Si quieres seleccionar líneas, utilizar las búsquedas asistidas, iniciar solicitudes o utilizar cualquiera de las funcionalidades LUC para empresas, además deberás crear una cuenta empresa (persona jurídica o persona humana) dentro de tu usuario.
+              </div>
+            </div>
+            <div class="faq-item" id="faq4">
+              <button class="faq-pregunta">¿Puedo modificar los datos de mi usuario?</button>
+              <div class="faq-respuesta">
+                LUC permite modificar determinados datos vinculados al usuario. Para hacerlo debés estar logueado y seguir estos pasos:<br><br>
+                1. Hacé click en el ícono de tu perfil -círculo verde con tus iniciales en blanco- que se encuentra en la esquina superior derecha de la pantalla.<br>
+                2. Seleccioná "Perfil y configuración" para ingresar en "Mi Perfil".<br>
+                3. En "Mi Perfil" podrás editar tanto tu teléfono como tu contraseña, desde el botón "Editar" que se encuentra junto a cada opción, y también podrás seleccionar si querés o no recibir notificaciones de LUC.
+              </div>
+            </div>
+            <div class="faq-item" id="faq5">
+              <button class="faq-pregunta">¿Puedo dar de baja mi usuario LUC?</button>
+              <div class="faq-respuesta">
+                Sí. Para dar de baja tu usuario en LUC tenés que comunicarte con el equipo de LUC a través de "Contactanos".<br><br>
+                1. Hacé click en el ícono de tu perfil -círculo verde con tus iniciales en blanco- que se encuentra en la esquina superior derecha de la pantalla.<br>
+                2. Seleccioná "Contactanos".<br>
+                3. Ingresá tu nombre y apellido y tu correo electrónico -deben ser aquellos con los que te diste de alta en LUC.<br>
+                4. Completá el campo de asunto con "Baja de usuario" y el del mensaje con los motivos por los que solicitás la baja.<br>
+                5. El equipo de LUC se comunicará con vos a la brevedad para proceder con la baja del usuario.
+              </div>
+            </div>
+          </section>
+          <section id="tema2">
+            <h3>Cuenta Empresa</h3>
+            <div class="faq-item" id="faq6">
+              <button class="faq-pregunta">¿Qué es una cuenta empresa?</button>
+              <div class="faq-respuesta">
+                La cuenta empresa es la que permite realizar las distintas opciones que trae LUC en nombre de una MiPyME: seleccionar líneas, iniciar y gestionar solicitudes, comunicarte con las entidades, cargar o descargar información, ver como te ven y mucho más.<br><br>
+                Las cuentas empresa están vinculadas a un usuario y cada usuario puede tener una o más cuentas empresa vinculadas, tanto de personas jurídicas como humanas.
+              </div>
+            </div>
+            <div class="faq-item" id="faq7">
+              <button class="faq-pregunta">¿Cómo doy de alta una empresa en LUC?</button>
+              <div class="faq-respuesta">
+                Una vez que tengas un usuario LUC:<br><br>
+                1. Dirigite a la sección Mis Empresas y clickeá en el botón “+ Nueva Empresa”<br>
+                2. Ingresá el CUIT de la empresa.<br>
+                3. Si sos responsable de la empresa, adjuntá la documentación que lo valide, sino solicitá validación al responsable, quien podrá hacerlo de manera sencilla.<br><br>
+                Si no sos el responsable contarás con una cuenta temporal, hasta que el responsable te valide. La cuenta temporal permite acceder a la Tienda y a Mis Solicitudes. Al ser aprobada por el responsable ante la AFIP pasará a ser una cuenta verificada con uso pleno de la Plataforma.<br><br>
+                Si tenés alguna duda sobre esto, mirá estos videos: <a href="#" id="verVideoJuridica" src="https://www.youtube.com/embed/z_WAIJLBlbQ" title="Vincular una cuenta MiPyME para Personas Jurídicas" style="color:#1e3a5c; text-decoration:underline; font-weight:600;">para persona jurídica</a>; <a href="#" id="verVideoMonoAuto" src="https://www.youtube.com/embed/SfHrW1pJm80" title="Vincular una cuenta MiPyME (Monotributistas/Autónomos)" style="color:#1e3a5c; text-decoration:underline; font-weight:600;">para monotributistas/autónomos</a>.
+              </div>
+            </div>
+            <div class="faq-item" id="faq8">
+              <button class="faq-pregunta">¿Puedo dar de baja una cuenta empresa?</button>
+              <div class="faq-respuesta">
+                Sí. Una cuenta empresa puede ser dada de baja, pero solamente por el Responsable de la misma. Para ello el usuario que tenga ese rol deberá:<br><br>
+                1. Ingresar al perfil de la empresa desde "Mis Empresas"<br>
+                2. Hacer click en los tres puntos que se encuentran junto al nombre de la empresa en la esquina superior izquierda de la pantalla.<br>
+                3. Hacer click en la opción "Eliminar empresa" y confirmar.<br><br>
+                Por una cuestión de seguridad los datos de la empresa quedarán resguardados en el sistema durante 3 meses, mientras que toda la información de las solicitudes enviadas se resguardará indefinidamente.
+              </div>
+            </div>
+          </section>
+          <section id="tema3">
+            <h3>Acceso, Roles y Privacidad</h3>
+            <div class="faq-item" id="faq9">
+              <button class="faq-pregunta">¿Quiénes pueden acceder a las cuentas de las empresas registradas?</button>
+              <div class="faq-respuesta">
+                Sólo podrán acceder aquellos usuarios LUC habilitados por el Responsable de la empresa con los permisos que este otorgue, asignando roles que poseen diferentes permisos (Administrador, Operador, Operador Tienda, Visualizador).
+              </div>
+            </div>
+            <div class="faq-item" id="faq10">
+              <button class="faq-pregunta">¿Qué puede hacer en LUC cada uno de los roles asignados?</button>
+              <div class="faq-respuesta">
+                <b>Responsable:</b> tiene accesos a todas las funcionalidades de LUC: búsqueda y selección de productos en la tienda, envío y seguimiento de solicitudes, acceso a información útil y ¿cómo me ven?, visualización y edición de datos de la empresa y legajo de contacto y presentaciones y mis carpetas (próximamente).<br>
+                <b>Administrador:</b> tiene acceso a todas las funcionalidades de LUC a excepción de dar de baja la empresa (atribución únicamente del Responsable).<br>
+                <b>Operador:</b> puede operar en la tienda, enviar y administrar solicitudes y editar el perfil de la empresa, pero no puede administrar usuarios ni dar de baja la empresa.<br>
+                <b>Operador Tienda:</b> puede operar exclusivamente en la tienda, buscar líneas, seleccionarlas y enviar y administrar solicitudes.<br>
+                <b>Visualizador:</b> puede visualizar tanto las operaciones en la tienda como el perfil de la empresa, pero no puede realizar ninguna modificación.
+              </div>
+            </div>
+            <div class="faq-item" id="faq11">
+              <button class="faq-pregunta">¿Cómo puedo agregar o cambiar un rol de usuario?</button>
+              <div class="faq-respuesta">
+                Solo podrás cambiar o agregar usuarios si sos el responsable o el administrador de tu empresa.<br><br>
+                1. Ingresá en Mis Empresas y elegí la empresa con la que deseas operar.<br>
+                2. Hacé clic en “roles”.<br>
+                3. Agregá, editá o aceptá invitaciones de usuarios para tu empresa, asignando el rol correspondiente a cada uno.
+              </div>
+            </div>
+            <div class="faq-item" id="faq12">
+              <button class="faq-pregunta">¿Quién puede ver la información que subo a LUC?</button>
+              <div class="faq-respuesta">
+                Toda la información que subís a LUC es privada. Sólo los usuarios de tu empresa -según los roles y permisos otorgados- tienen acceso a esta información.<br><br>
+                En el momento que completas una solicitud el oferente podrá ver tu Legajo de Contacto y tu Información de Bases Públicas. NO tiene acceso a ver el resto de la información que la empresa tiene disponible en SU espacio. Si no completas una solicitud nadie podrá ver la documentación que subiste a LUC.
+              </div>
+            </div>
+          </section>
+          <section id="tema4">
+            <h3>Enviar una Solicitud</h3>
+            <div class="faq-item" id="faq13">
+              <button class="faq-pregunta">¿Tiene costo para mi empresa enviar solicitudes a través de LUC?</button>
+              <div class="faq-respuesta">
+                No, solicitar financiamiento o aval a través de LUC no tiene costo para las empresas.
+              </div>
+            </div>
+            <div class="faq-item" id="faq14">
+              <button class="faq-pregunta">¿Cómo son los pasos para completar una solicitud a través de LUC?</button>
+              <div class="faq-respuesta">
+                1. Guarda las líneas elegidas en tu Selección.<br>
+                &nbsp;&nbsp;• Ingresá a la Tienda y buscá las líneas que sean de tu interés.<br>
+                &nbsp;&nbsp;• Hacé clic en el botón de “Agregar a mi selección” y asignale la empresa para la cual harás la solicitud (si tenés sólo una empresa LUC será a ella, si no te mostrará todas las disponibles).<br>
+                2. Enviá las solicitudes de precalificación.<br>
+                &nbsp;&nbsp;• Ingresá a tu Selección desde el botón en el margen superior derecho y eligí la empresa de la cual querés ver las líneas seleccionadas.<br>
+                &nbsp;&nbsp;• Si tenés el legajo completo, elegí qué líneas querés solicitar y personalizá el mensaje que le quieras enviar al oferente y pulsá el botón “Iniciar solicitud”. Si no tenés el legajo completo, completalo antes de proseguir.<br>
+                &nbsp;&nbsp;• Revisá y confirmá el legajo y las líneas a solicitar y enviá tu solicitud.<br><br>
+                Si tenés alguna duda <a href="#" id="verVideoSolicitud" src="https://www.youtube.com/embed/Ih6rlTVDDLY" title="Enviar una solicitud de financiamiento" style="color:#1e3a5c; text-decoration:underline; font-weight:600;">mirá este video</a>.
+              </div>
+            </div>
+            <div class="faq-item" id="faq15">
+              <button class="faq-pregunta">¿Qué información necesito para crear una solicitud?</button>
+              <div class="faq-respuesta">
+                Para completar una solicitud tendrás que completar el Legajo de Contacto al 100%. El Legajo contiene:<br><br>
+                • Datos de Contacto<br>
+                • Datos de la actividad de la MiPyME<br>
+                • Información del Certificado MiPyME (si lo tenés)<br>
+                • Información Fiscal<br><br>
+                Algunas líneas requerirán para personas jurídicas Información Adicional, que incluye estado de situación patrimonial de los últimos dos años, incluyendo movimientos de compras y ventas.
+              </div>
+            </div>
+            <div class="faq-item" id="faq16">
+              <button class="faq-pregunta">¿Cómo hago el seguimiento de mi solicitud?</button>
+              <div class="faq-respuesta">
+                1. Hacé click en el botón de “Solicitudes” del menú superior.<br>
+                2. Hacé click en el botón “Detalle” de la solicitud que quieras hacer seguimiento.<br>
+                3. Ahí podrás ver el estado de la solicitud, chatear con la entidad que publicó la línea e intercambiar la documentación necesaria. También recibirás notificaciones cuando haya alguna actualización en el proceso.
+              </div>
+            </div>
+            <div class="faq-item" id="faq17">
+              <button class="faq-pregunta">¿Es necesario tener Certificado MiPyME para hacer una Solicitud?</button>
+              <div class="faq-respuesta">
+                No hace falta tener Certificado MiPyME para hacer una solicitud a través de LUC. Sin embargo, puede haber entidades oferentes que te lo soliciten en el transcurso de la solicitud.
+              </div>
+            </div>
+          </section>
+          <section id="tema5">
+            <h3>Soluciones LUC</h3>
+            <div class="faq-item" id="faq18">
+              <button class="faq-pregunta">¿Qué es "Ver cómo me ven"?</button>
+              <div class="faq-respuesta">
+                Muestra la información de tu empresa y sus accionistas -en caso de que corresponda y los hayas cargado- disponible en bases públicas y bureau de crédito (BCRA, ARCA, NOSIS). Es la información que habitualmente ven los Bancos, financieras, clientes y proveedores. LUC te da acceso para que puedas ver cómo te ven y utilizar la información en beneficio de tu empresa.<br><br>
+                1. <b>Resumen:</b> Principales indicadores para que tengas un vistazo rápido de cómo te ves. Podrás verlos ampliados en el resto de las secciones.<br>
+                2. <b>Información fiscal:</b> Datos generales de la Empresa, Actividades en la que se encuentra inscripto, Impuestos en los que se encuentra inscripto<br>
+                3. <b>Créditos en el sistema financiero:</b> Información de los montos y estados de situación informado por las entidades Bancarias al BCRA, Monto informado agrupado por situación (normal, con seguimiento especial, con problemas, con alto riesgo de insolvencia, irrecuperables, irrecuperables por disposición técnica), Detalle del estado de situación de los últimos 12 meses informado por las Entidades Bancarias, Detalle de los montos informados por las Entidades Bancarias de los últimos 12 meses<br>
+                4. <b>Cheques:</b> Cantidad de cheques: sin fondos o no pagados, con otros motivos o no pagados, sin fondos sin pago de multas, y el monto de cheques dentro de cada categoria. Detalle de cheques impagos: CUIT, Monto, Nro. Cheque, Fecha Pago, Razón, Fecha rechazo, Fecha pago multa, Multa pagada.<br>
+                5. <b>Aportes previsionales:</b> Cantidad aportada por estado (pago, pago parcial, impago). Como empleador detalle de período aportado, aporte de seguridad social, aportes a la obra social, contribución patronal de la obra social.<br>
+                6. <b>Score crediticio:</b> Score NOSIS, Tendencias últimos 4 trimestres<br>
+                7. <b>Indicadores financieros:</b> Rentabilidad, Liquidez corriente, Endeudamiento, Capital de trabajo, Ventas mensuales promedio, Solvencia, Endeudamiento diferido, Retorno sobre activo total, Uilidad neta sobre patrimonio neto, Ventas post balance, Compras post balance<br><br>
+                Importante: esta información es exclusiva de la empresa y no es compartida con ninguna entidad, excepto que la adjuntes a una solicitud expresamente.
+              </div>
+            </div>
+            <div class="faq-item" id="faq19">
+              <button class="faq-pregunta">¿Con qué frecuencia se actualiza la información en “Ver cómo me ven”?</button>
+              <div class="faq-respuesta">
+                La información del BCRA se actualiza quincenalmente, mientras que la de ARCA y la del bureau de crédito se actualizan con una frecuencia mensual.
+              </div>
+            </div>
+            <div class="faq-item" id="faq20">
+              <button class="faq-pregunta">¿Qué información puedo subir en la sección "Datos / Información"?</button>
+              <div class="faq-respuesta">
+                Es un espacio exclusivo para almacenamiento, visualización y uso de tu empresa. Allí podrás completar la siguiente información:<br><br>
+                • Información General: información de contacto, domicilios, información constitutiva e impositiva.<br>
+                • Actividad: información de ingresos, clientes y proveedores.<br>
+                • Información Económica - Financiera: compras y ventas mensuales por semestre, relación de ingresos y egresos, totales por año, posibilidad de agregar documentación sobre declaraciones impositivas, proyecciones, certificaciones contables, estado de deudas, otros.<br>
+                • Manifestación de Bienes / Estados contables: estado de situación patrimonial.<br>
+                • Personas Relacionadas: autoridades, cónyuges, empleados, entre otros.<br><br>
+                En cada sección podrás adjuntar documentación que consideres necesario resguardar o exportarla para presentar o analizar por fuera de la Plataforma.
+              </div>
+            </div>
+            <div class="faq-item" id="faq21">
+              <button class="faq-pregunta">¿Para qué sirve "Mis Documentos"?</button>
+              <div class="faq-respuesta">
+                Mis Documentos es un espacio exclusivo que te permite localizar fácilmente tus archivos buscando en un set de filtros que se corresponden con el lugar donde los cargaste, y podés ubicarlo en una o más carpetas sin duplicar archivos. La carpeta toma el archivo de donde esté. Podés organizarlos por temas o con el criterio que necesites.<br><br>
+                Por ej. armar carpetas “presentado al Banco x” con toda la documentación presentada a ese Banco y otra que sea Presentado a cliente x sin duplicar en cada caso los documentos (toma los archivos de cada una de las carpetas en los que ya estén subidos).
+              </div>
+            </div>
+          </section>
+          <div class="faq-leyenda-final" style="margin:2.5em 0 1.5em 0; padding:1.2em 1.5em; color:#008547; font-size:1em; font-weight:500; border-radius:10px;">
+            Si tenés otra pregunta <a href="contacto.html" style="color:#008547; text-decoration:underline; font-weight:600;">contactanos</a>.
+          </div>
+      </div>
+    </section>
+  </main>
+  <script>
+// Menú filtrador de categorías en preguntas frecuentes
+const categorias = [
+  { id: 'todas', nombre: 'Todas' },
+  { id: 'tema1', nombre: 'Usuario' },
+  { id: 'tema2', nombre: 'Cuenta Empresa' },
+  { id: 'tema3', nombre: 'Acceso, Roles y Privacidad' },
+  { id: 'tema4', nombre: 'Enviar una Solicitud' },
+  { id: 'tema5', nombre: 'Soluciones LUC' }
+];
+const indiceLinks = document.querySelectorAll('.faq-indice a');
+const secciones = document.querySelectorAll('.faq-main > section');
+let categoriaActiva = 'todas';
+
+function mostrarSoloCategoria(id) {
+  if (id === 'todas') {
+    secciones.forEach(sec => { sec.style.display = ''; });
+  } else {
+    secciones.forEach(sec => {
+      if (sec.id === id) {
+        sec.style.display = '';
+      } else {
+        sec.style.display = 'none';
+      }
+    });
+  }
+  indiceLinks.forEach(link => {
+    if (link.getAttribute('href') === '#' + id) {
+      link.classList.add('activo');
+    } else {
+      link.classList.remove('activo');
+    }
+  });
+  categoriaActiva = id;
+}
+
+indiceLinks.forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const id = this.getAttribute('href').replace('#', '');
+    mostrarSoloCategoria(id);
+  });
+});
+// Mostrar todas las categorías al cargar
+mostrarSoloCategoria(categoriaActiva);
+
+// Script acordeón para preguntas frecuentes
+function activarAcordeonPreguntas() {
+  const faqButtons = document.querySelectorAll('.faq-pregunta');
+  faqButtons.forEach(btn => {
+    btn.onclick = function() {
+      const respuesta = this.nextElementSibling;
+      this.classList.toggle('active');
+      if (respuesta.style.maxHeight) {
+        respuesta.style.maxHeight = null;
+        respuesta.classList.remove('abierta');
+      } else {
+        document.querySelectorAll('.faq-respuesta').forEach(r => {
+          r.style.maxHeight = null;
+          r.classList.remove('abierta');
+        });
+        respuesta.style.maxHeight = respuesta.scrollHeight + 'px';
+        respuesta.classList.add('abierta');
+      }
+    };
+  });
+}
+activarAcordeonPreguntas();
+
+// Buscador de preguntas frecuentes integrado con filtro de categorías
+const faqSearch = document.getElementById('faqSearch');
+faqSearch.addEventListener('input', function() {
+  const value = this.value.toLowerCase();
+  // Si no hay texto, mostrar según filtro de categoría
+  if (!value) {
+    mostrarSoloCategoria(categoriaActiva);
+    return;
+  }
+  // Si hay texto, mostrar solo las preguntas que coincidan
+  secciones.forEach(sec => {
+    let algunaCoincide = false;
+    const items = sec.querySelectorAll('.faq-item');
+    items.forEach(item => {
+      const pregunta = item.querySelector('.faq-pregunta').textContent.toLowerCase();
+      const respuesta = item.querySelector('.faq-respuesta').textContent.toLowerCase();
+      if (pregunta.includes(value) || respuesta.includes(value)) {
+        item.style.display = '';
+        algunaCoincide = true;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+    // Mostrar la sección solo si alguna pregunta coincide
+    sec.style.display = algunaCoincide ? '' : 'none';
+  });
+  // Quitar el resaltado de categoría activa
+  indiceLinks.forEach(link => link.classList.remove('activo'));
+});
+  </script>
+<style>
+.faq-indice a.activo {
+  color: var(--verde-oscuro);
+  font-weight: 700;
+  text-decoration: underline;
+}
+</style>
+</body>
+</html> 

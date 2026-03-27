@@ -1,0 +1,64 @@
+﻿.heart {
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    background-image: url('https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: 2900%;
+}
+
+.heart-complete {
+    background-position: right !important;
+}
+
+.heart-complete:hover {
+    background-position: left !important;
+}
+
+.heart:hover {
+    background-position:right;
+}
+
+.is_animating {
+    background-position: right;
+    animation: heart-burst .8s steps(28) 1;
+}
+
+@keyframes heart-burst {
+    from {background-position:left;}
+    to { background-position:right;}
+}
+
+.fav {
+    cursor: pointer;
+    background-position: left;
+    background-repeat: no-repeat;
+    display: inline-block;
+
+    /*background-image: url("https://res.cloudinary.com/shanomurphy/image/upload/v1547543273/fave_ltre0q.png");*/
+    height: 45px;
+    width: 64px;
+}
+
+.fav:hover {
+    background-position: right;
+}
+
+.fav-complete {
+    background-position: right !important;
+}
+
+.fav-complete:hover {
+    background-position: left !important;
+}
+
+.is_fav_animating {
+    background-position: right;
+    animation: fav-burst .8s steps(55) 1;
+}
+
+@keyframes fav-burst {
+    from { background-position: left;  }
+    to   { background-position: right; }
+}

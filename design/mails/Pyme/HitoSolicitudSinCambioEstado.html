@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="x-apple-disable-message-reformatting"/>
+    <meta content="ie=edge" http-equiv="x-ua-compatible"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="telephone=no, date=no, address=no, email=no" name="format-detection"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700" media="screen" rel="stylesheet"/>
+    <title>Seguimiento de tu solicitud {{bigIdSolicitud}}</title>
+    <style>
+        .hover-underline:hover {
+            text-decoration: underline !important;
+        }
+        @media (max-width: 600px) {
+            .sm-w-full {
+                width: 100% !important;
+            }
+            .sm-px-24 {
+                padding-left: 24px !important;
+                padding-right: 24px !important;
+            }
+            .sm-py-32 {
+                padding-top: 32px !important;
+                padding-bottom: 32px !important;
+            }
+            .sm-leading-32 {
+                line-height: 32px !important;
+            }
+        }
+        .saludo-inicial {
+            font-family: Montserrat, sans-serif;
+            mso-line-height-rule: exactly;
+            margin-bottom: 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .nombre-saludo-inicial {
+            font-family: Montserrat, sans-serif;
+            mso-line-height-rule: exactly;
+            margin-top: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: rgb(105, 181, 76);
+        }
+        .texto-base {
+            font-family: Montserrat, sans-serif;
+            mso-line-height-rule: exactly;
+            margin: 24px 0;
+        }
+        .texto-base-negrita {
+            font-weight: 600;
+        }
+        .saludo-final {
+            font-family: Montserrat, sans-serif;
+            mso-line-height-rule: exactly;
+            margin: 0;
+            margin-bottom: 16px;
+        }
+        .td-divisoria {
+            font-family: Montserrat, sans-serif;
+            mso-line-height-rule: exactly;
+            padding-top: 32px;padding-bottom: 32px;
+        }
+        .td-divisoria > div {
+            font-family: Montserrat, sans-serif;
+            mso-line-height-rule: exactly;
+            height: 1px;
+            background-color: #eceff1;
+            line-height: 1px;
+        }
+        .link {
+            font-family: Montserrat, sans-serif;
+            mso-line-height-rule: exactly;
+            color: #7367f0;
+            text-decoration: none;
+        }
+        .link:hover {
+            cursor: pointer;
+        }
+        .aclaracion-url {
+            padding-left: 48px;
+            padding-right: 48px;
+        }
+        .aclaracion-url > p {
+            font-weight: 500;
+            font-size: 12px;
+            color: rgb(147, 147, 147);
+        }
+        .aclaracion-url > p:first-child {
+            margin-top: -15px !important;
+        }
+        .content-observaciones {
+            font-style: italic;
+            padding: 20px 10px;
+            background-color: #F4F4F7;
+            border-radius: 10px
+        }
+        .button-custom {
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+            isolation: isolate;
+            border-radius: 100px;
+            text-transform: none;
+            height: fit-content;
+            width: fit-content;
+            padding: 12px 16px !important;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 140%;
+            background-color: #008547;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div style="font-family: Montserrat, sans-serif; mso-line-height-rule: exactly; display: none;">
+    Seguimiento de tu solicitud {{bigIdSolicitud}}
+</div>
+<div lang="en" style="font-family: Montserrat, sans-serif; mso-line-height-rule: exactly;" role="article" aria-label="Seguimiento de tu solicitud {{bigIdSolicitud}}" aria-roledescription="email">
+    <table style="width: 100%; font-family: Montserrat, -apple-system, Segoe UI, sans-serif;" role="presentation" cellspacing="0" cellpadding="0">
+        <tbody>
+        <tr>
+            <td style="mso-line-height-rule: exactly; background-color: #eceff1; font-family: Montserrat, -apple-system, Segoe UI, sans-serif;" align="center">
+                <div id="body_plantilla_mail"></div>
+                <table class="sm-w-full" style="width: 600px;" role="presentation" cellspacing="0" cellpadding="0">
+                    <tbody>
+                    <tr>
+                        <td class="sm-py-32 sm-px-24" style="mso-line-height-rule: exactly; padding: 48px; text-align: center; font-family: Montserrat, -apple-system, Segoe UI, sans-serif;"><a style="font-family: Montserrat, sans-serif; mso-line-height-rule: exactly;" href="{{urlLogin}}">
+                            <img style="max-width: 140px; vertical-align: middle; line-height: 100%; border: 0;" src="data:image/png;base64,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" alt="LUC"> </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="sm-px-24" style="font-family: Montserrat, sans-serif; mso-line-height-rule: exactly;" align="center">
+                            <table style="width: 99.4975%" role="presentation" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                <tr> <td class="sm-px-24" style="border-radius: 4px; background-color: #ffffff; padding: 48px; text-align: left; font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif; font-size: 16px; line-height: 24px; color: #626262; width: 100%;">
+                                    <p class="saludo-inicial">Estimado/a</p>
+                                    <p class="nombre-saludo-inicial">{{vchRazonSocialUsuario}}</p>
+
+                                    <p>
+                                        Enviaste una solicitud a
+                                        <span class="texto-base-negrita">{{vchRazonSocialOferente}}</span>
+                                        en nombre de
+                                        <span class="texto-base-negrita">{{vchRazonSocialEmpresa}}</span>. 
+                                        La entidad te responderá a la brevedad, cualquier consulta o inconveniente no dudes en 
+                                        <a class="link" href="{{urlContacto}}">contactarnos</a>.
+                                    </p>
+                                    
+                                    <div style="text-align: center; place-items: center">
+                                        <a class="button-custom"
+                                           href="{{urlContacto}}"
+                                           target="_blank"
+                                        >
+                                            CONTACTANOS
+                                        </a>
+                                    </div>
+                                    
+                                    
+                                    <table style="width: 100%;" role="presentation" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                        <tr>
+                                            <td class="td-divisoria">
+                                                <div>&nbsp;</div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <p class="saludo-final">Saludos. <br>Equipo de LUC</p>
+                                </td>
+                                </tr>
+                                <tr style="height: 21.25px;">
+                                    <td style="font-family: Montserrat, sans-serif; text-align: center; width: 100%;"><strong>
+                                        <a class="link" href="{{urlLogin}}">Ingres&aacute; en LUC</a>
+                                    </strong>&nbsp;<strong>
+                                        <span style="color: #95a5a6;">|</span> &nbsp;
+                                        <a class="link" href="{{urlContacto}}">Contactanos</a>
+                                    </strong>
+                                    </td>
+                                </tr>
+                                <tr style="height: 10px;">
+                                    <td style="font-family: Montserrat, sans-serif; width: 100%;">&nbsp;</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+﻿.gitignore
+.prettierignore
+node_modules
+src/**/*.css

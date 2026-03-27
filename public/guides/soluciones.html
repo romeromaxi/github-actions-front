@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soluciones LUC</title>
+  <link rel="stylesheet" href="/guides/styles.css">
+</head>
+<script>
+  function navigateTo(page) {
+    window.parent.postMessage({ type: 'navigate-instructivo-ayuda', page }, '*');
+  }
+
+  function notifyHeight() {
+    const height = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'resize-iframe-ayuda', height }, '*');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    notifyHeight();
+
+    document.querySelectorAll('a[href$=".html"]').forEach((link) => {
+      const href = link.getAttribute('href');
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        navigateTo(href);
+      });
+    });
+
+    const resizeObserver = new ResizeObserver(() => {
+      notifyHeight();
+    });
+    resizeObserver.observe(document.body);
+
+
+    setTimeout(notifyHeight, 1000);
+  });
+
+  window.addEventListener('load', notifyHeight);
+</script>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="que-es-luc.html">¿Qué es LUC?</a></li>
+        <li><a class="nav-links-selected" href="soluciones.html">Soluciones LUC</a></li>
+        <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+        <li><a href="instructivos.html">Instructivos</a></li>
+        <li><a href="contacto.html">Contactanos</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="contenido">
+      <h1 class="main-title">Soluciones LUC</h1>
+      <div class="tarjetas-soluciones">
+        <!-- Primera fila -->
+        <div class="tarjeta-flip">
+          <div class="tarjeta-flip-inner">
+            <div class="tarjeta-flip-front" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 12px;">
+                <rect x="8" y="16" width="32" height="20" rx="4" fill="var(--verde-oscuro)"/>
+                <rect x="14" y="12" width="20" height="8" rx="2" fill="var(--verde-claro)"/>
+                <rect x="18" y="28" width="12" height="4" rx="1.5" fill="var(--blanco)"/>
+              </svg>
+              <h2 style="margin: 0;">Tienda</h2>
+            </div>
+            <div class="tarjeta-flip-back">
+              <div class="tarjeta-flip-back-content">
+                <p>LUC te ofrece distintas formas para encontrar la mejor opción de financiamiento de las principales entidades del país, sin costo adicional.<br><br>
+Podés buscar entre las ofertas de financiamiento y cobertura disponibles en la Tienda, a las que cada día se incorporan nuevas y, si no encontrás lo que buscás, podés enviar una Búsqueda Asistida, a través de la cual el equipo de LUC -entidades o cámaras aliadas- te ayudará a encontrar en el mercado las opciones más adecuadas para tu empresa, estén o no en nuestra tienda.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tarjeta-flip">
+          <div class="tarjeta-flip-inner">
+            <div class="tarjeta-flip-front" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+              <!-- Ícono Información Útil -->
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 12px;">
+                <circle cx="24" cy="24" r="20" fill="var(--verde-oscuro)"/>
+                <rect x="22" y="16" width="4" height="12" rx="2" fill="var(--blanco)"/>
+                <rect x="22" y="30" width="4" height="4" rx="2" fill="var(--verde-claro)"/>
+              </svg>
+              <h2 style="margin: 0;">Información Útil</h2>
+            </div>
+            <div class="tarjeta-flip-back">
+              <div class="tarjeta-flip-back-content">
+                <p>LUC ofrece un set de herramientas que te ayudarán a aprovechar las opciones de financiamiento y cobertura con la mayor información posible: un glosario con los conceptos más importantes, artículos, contenidos de interés y recomendaciones de entidades prestigiosas.<br><br>
+Contar con mayor y mejor información permite elegir más libre y adecuadamente.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tarjeta-flip">
+          <div class="tarjeta-flip-inner">
+            <div class="tarjeta-flip-front" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+              <!-- Ícono Gráfico de Barras para Ver Cómo me Ven -->
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 12px;">
+                <rect x="10" y="30" width="6" height="10" rx="2" fill="var(--verde-oscuro)"/>
+                <rect x="20" y="22" width="6" height="18" rx="2" fill="var(--verde-claro)"/>
+                <rect x="30" y="14" width="6" height="26" rx="2" fill="var(--verde-oscuro)"/>
+                <rect x="8" y="40" width="36" height="2" rx="1" fill="var(--verde-oscuro)"/>
+              </svg>
+              <h2 style="margin: 0;">Ver Cómo me Ven</h2>
+            </div>
+            <div class="tarjeta-flip-back">
+              <div class="tarjeta-flip-back-content">
+                <p>Las entidades que otorgan cobertura y financiamiento, así como proveedores y clientes pueden ver información pública de tu empresa (disponible en BCRA, ARCA y Bureau de crédito) y utilizarla para evaluar su capacidad crediticia.<br><br>
+LUC ordena para vos toda esa información, junto a los principales indicadores económico-financieros, para que seas el primero en acceder a ella y conocer tus fortalezas y los puntos a resolver a tiempo para estar siempre en la mejor situación.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Segunda fila -->
+      <div class="tarjetas-soluciones">
+        <div class="tarjeta-flip">
+          <div class="tarjeta-flip-inner">
+            <div class="tarjeta-flip-front" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+              <!-- Ícono Legajo de Contacto (igual que Gestión de Solicitudes) -->
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 12px;">
+                <rect x="12" y="12" width="24" height="32" rx="4" fill="var(--verde-oscuro)"/>
+                <rect x="16" y="20" width="16" height="2" rx="1" fill="var(--blanco)"/>
+                <rect x="16" y="26" width="16" height="2" rx="1" fill="var(--verde-claro)"/>
+                <rect x="16" y="32" width="10" height="2" rx="1" fill="var(--blanco)"/>
+              </svg>
+              <h2 style="margin: 0; text-align: center; line-height: 1.1;">
+                Legajo<br>
+                de Contacto
+              </h2>
+            </div>
+            <div class="tarjeta-flip-back">
+              <div class="tarjeta-flip-back-content">
+                <p>El Legajo de contacto contiene la información que permite a todas las entidades evaluar el perfil de la empresa y su ajuste a la línea solicitada desde el primer contacto.<br><br>
+El legajo viene con la información pública disponible precargada. Hay que incorporar información propia, que se carga una sola vez y queda disponible para todas las gestiones. A futuro, sólo tendrás que actualizar a medida que vaya pasando el tiempo o necesites corregir.<br><br>
+Tener la información completa también permite que veas toda la información de tu empresa en ver cómo me ven.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tarjeta-flip">
+          <div class="tarjeta-flip-inner">
+            <div class="tarjeta-flip-front" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+              <!-- Ícono Ojo para Gestión de Solicitudes -->
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 12px;">
+                <ellipse cx="24" cy="24" rx="16" ry="10" fill="var(--verde-oscuro)"/>
+                <ellipse cx="24" cy="24" rx="8" ry="5" fill="var(--blanco)"/>
+                <circle cx="24" cy="24" r="3" fill="var(--verde-claro)"/>
+              </svg>
+              <h2 style="margin: 0; text-align: center; word-break: break-word; hyphens: auto;">Gestión de Solicitudes</h2>
+            </div>
+            <div class="tarjeta-flip-back">
+              <div class="tarjeta-flip-back-content">
+                <p>Podrás ver y gestionar de manera ordenada las solicitudes en curso a través de un panel integrado, al igual que mantener el contacto e intercambiar documentación con la entidad oferente si fuera necesario.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tarjeta-flip">
+          <div class="tarjeta-flip-inner">
+            <div class="tarjeta-flip-front" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+              <!-- Ícono Formulario con líneas y ticks alineados a la derecha para Datos de la Empresa -->
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 12px;">
+                <!-- Formulario -->
+                <rect x="8" y="10" width="32" height="28" rx="5" fill="var(--verde-oscuro)"/>
+                <!-- Líneas y ticks alineados a la derecha -->
+                <g>
+                  <rect x="14" y="16" width="14" height="2" rx="1" fill="var(--blanco)"/>
+                  <path d="M36 17 l2 2 l4 -4" stroke="var(--verde-claro)" stroke-width="2" fill="none"/>
+                </g>
+                <g>
+                  <rect x="14" y="22" width="10" height="2" rx="1" fill="var(--blanco)"/>
+                  <path d="M36 23 l2 2 l4 -4" stroke="var(--verde-claro)" stroke-width="2" fill="none"/>
+                </g>
+                <g>
+                  <rect x="14" y="28" width="8" height="2" rx="1" fill="var(--blanco)"/>
+                  <path d="M36 29 l2 2 l4 -4" stroke="var(--verde-claro)" stroke-width="2" fill="none"/>
+                </g>
+              </svg>
+              <h2 style="margin: 0; text-align: center; line-height: 1.1;">
+                Datos de<br>
+                la Empresa
+              </h2>
+            </div>
+            <div class="tarjeta-flip-back">
+              <div class="tarjeta-flip-back-content">
+                <p>Espacio privado de cada empresa. Almacená información, datos y documentos en un entorno intuitivo y eficiente. Se nutre de datos de acceso público, de manera que cuenta con una base de información precargada, que puede ser fácilmente actualizada.<br><br>
+Lo que guardes en esta sección es fácilmente accesible para descargar, exportar y compartir, aún con personas que no sean usuarias de LUC.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Tercera fila -->
+      <div class="tarjetas-soluciones">
+        <div class="tarjeta-flip">
+          <div class="tarjeta-flip-inner">
+            <div class="tarjeta-flip-front" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+              <!-- Ícono Carpeta con hoja y lupa mejorado para Mis Documentos -->
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 12px;">
+                <!-- Hoja detrás de la carpeta -->
+                <rect x="14" y="12" width="20" height="16" rx="2" fill="var(--blanco)"/>
+                <!-- Carpeta -->
+                <rect x="10" y="20" width="28" height="12" rx="3" fill="var(--verde-oscuro)"/>
+                <rect x="10" y="16" width="12" height="8" rx="2" fill="var(--verde-claro)"/>
+                <!-- Lupa -->
+                <circle cx="34" cy="36" r="5" fill="var(--blanco)" stroke="var(--verde-claro)" stroke-width="2"/>
+                <rect x="37" y="39" width="2" height="7" rx="1" fill="var(--verde-claro)" transform="rotate(45 37 39)"/>
+              </svg>
+              <h2 style="margin: 0;">Mis Documentos</h2>
+            </div>
+            <div class="tarjeta-flip-back">
+              <div class="tarjeta-flip-back-content">
+                <p>Podés gestionar los archivos que hayas guardado en LUC, así como los que vayas generando desde la plaforma (por ejemplo: solicitudes y presentaciones).<br><br>
+LUC te permite localizar fácilmente tus archivos y ubicarlos en una o más carpetas sin duplicarlos. La carpeta toma el archivo de donde esté. Podés organizarlos con el criterio que necesites.<br><br>
+Guardar la información de este modo es fácil y rápido y especialmente eficaz a la hora de buscar, preparar presentaciones y enviar.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tarjeta-flip">
+          <div class="tarjeta-flip-inner">
+            <div class="tarjeta-flip-front" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+              <!-- Ícono Atril con hoja para Presentaciones -->
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 12px;">
+                <!-- Hoja de presentación -->
+                <rect x="16" y="12" width="16" height="20" rx="2" fill="var(--blanco)" stroke="var(--verde-oscuro)" stroke-width="2"/>
+                <rect x="20" y="18" width="8" height="2" rx="1" fill="var(--verde-claro)"/>
+                <rect x="20" y="22" width="8" height="2" rx="1" fill="var(--verde-claro)"/>
+                <!-- Atril -->
+                <rect x="22" y="32" width="4" height="8" rx="2" fill="var(--verde-oscuro)"/>
+                <rect x="16" y="40" width="16" height="2" rx="1" fill="var(--verde-oscuro)"/>
+              </svg>
+              <h2 style="margin: 0; text-align: center; word-break: break-word; hyphens: auto;">
+                Presentaciones<br>
+                <span style="font-size: 0.75em; font-weight: 400;">(proximamente)</span>
+              </h2>
+            </div>
+            <div class="tarjeta-flip-back">
+              <div class="tarjeta-flip-back-content">
+                <p>Contás con un espacio para crear, guardar, descargar, compartir, editar y reutilizar todo tipo de presentaciones de manera sencilla. Permite importar información desde “datos de la empresa” y utilizar formatos predefinidos elaborados por la empresa o por LUC.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+// Efecto flip para las tarjetas
+const tarjetas = document.querySelectorAll('.tarjeta-flip');
+tarjetas.forEach(tarjeta => {
+  tarjeta.addEventListener('click', function(e) {
+    // Evita que el click en el interior de la tarjeta (por ejemplo, en el texto) detenga el flip
+    e.stopPropagation();
+    if (this.classList.contains('flipped')) {
+      this.classList.remove('flipped');
+    } else {
+      tarjetas.forEach(t => t.classList.remove('flipped'));
+      this.classList.add('flipped');
+    }
+  });
+});
+  </script>
+</body>
+</html> 

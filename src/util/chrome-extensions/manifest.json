@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name":"Importar desde biblioteca - LUC",
+  "version": "0.0.1",
+  "description": "Extensión de Chrome para importar desde la biblioteca de LUC a cualquier página con un input de archivos",
+  "host_permissions":["http://localhost:3000/*"],
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "webNavigation",
+    "webRequest",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["styles.css"],
+      "js": ["content.js"]
+    }
+  ],
+  "action":{
+    "default_popup":"hello.html",
+    "default_icon": "import-icon-extension.png",
+    "title": "Importar desde biblioteca - LUC"
+  }
+}

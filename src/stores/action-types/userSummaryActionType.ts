@@ -1,0 +1,4 @@
+﻿export enum UserSummaryActionType {
+  RELOAD_USER_SUMMARY = 'RELOAD_USER_SUMMARY',
+  SET_USER_SUMMARY = 'SET_USER_SUMMARY',
+}

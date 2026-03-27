@@ -1,0 +1,63 @@
+import {EntityWithId} from "../baseEntities";
+
+
+export enum LufeFinanceIndicatorFields {
+    RequestId = 'idLufeConsulta',
+    Period = 'periodo',
+    PresentationDate = 'fechapresentacion',
+    Rentability = 'rentabilidad',
+    VtaEvolution = 'evolucion_vta',
+    Liquidity = 'liquidez_cte',
+    Debtness = 'endeudamiento',
+    WorkingCapital = 'capital_trabajo',
+    MediumTermToCollect = 'plazo_medio_ctas_a_cobar',
+    InventoriesRotation = 'rotacion_inventarios',
+    MediumTermToPay = 'plazo_medio_ctas_a_pagar',
+    InputsTotalPurchases = 'compras_totales_insumos',
+    AverageMonthlySales = 'vtas_mensuales_prom',
+    ImmobilizationFixedAssets = 'inmovilizacion_bienes_de_uso',
+    FixedAssetsExportationAffectedProductivity = 'productividad_bs_de_uso_afectados_exportacion',
+    AmortizationIncidenceFixedAssetsOnCosts = 'incidencia_amortizaciones_bs_uso_sobre_costos',
+    Solvency = 'solvencia',
+    DeferredDebtness = 'endeudamiento_diferido',
+    AcidLiquidity = 'liquidez_acida',
+    Ebitda = 'ebitda',
+    TotalActiveReturn = 'retorno_activo_total',
+    NetPatrimonyReturn = 'retorno_patrimonio_neto',
+    NetPatrimonyUtility = 'utilidad_neta_patrimonio_neto',
+    GrossUtilityCosts = 'utilidad_bruta_costos',
+    EbitVtas = 'ebit_vtas',
+    Ebit = 'ebit',
+    EbitdaVtas = 'ebitda_vtas'
+}
+
+
+export interface LufeFinanceIndicator extends EntityWithId<number> {
+    [LufeFinanceIndicatorFields.RequestId]: number,
+    [LufeFinanceIndicatorFields.Period]?: string,
+    [LufeFinanceIndicatorFields.PresentationDate]?: string,
+    [LufeFinanceIndicatorFields.Rentability]?: number,
+    [LufeFinanceIndicatorFields.VtaEvolution]?: number,
+    [LufeFinanceIndicatorFields.Liquidity]?: number,
+    [LufeFinanceIndicatorFields.Debtness]?: number,
+    [LufeFinanceIndicatorFields.WorkingCapital]?: number,
+    [LufeFinanceIndicatorFields.MediumTermToCollect]?: number,
+    [LufeFinanceIndicatorFields.InventoriesRotation]?: number,
+    [LufeFinanceIndicatorFields.MediumTermToPay]?: number,
+    [LufeFinanceIndicatorFields.InputsTotalPurchases]?: number,
+    [LufeFinanceIndicatorFields.AverageMonthlySales]?: number,
+    [LufeFinanceIndicatorFields.ImmobilizationFixedAssets]?: number,
+    [LufeFinanceIndicatorFields.FixedAssetsExportationAffectedProductivity]?: number,
+    [LufeFinanceIndicatorFields.AmortizationIncidenceFixedAssetsOnCosts]?: number,
+    [LufeFinanceIndicatorFields.Solvency]?: number,
+    [LufeFinanceIndicatorFields.DeferredDebtness]?: number,
+    [LufeFinanceIndicatorFields.AcidLiquidity]?: number,
+    [LufeFinanceIndicatorFields.Ebitda]?: number,
+    [LufeFinanceIndicatorFields.TotalActiveReturn]?: number,
+    [LufeFinanceIndicatorFields.NetPatrimonyReturn]?: number,
+    [LufeFinanceIndicatorFields.NetPatrimonyUtility]?: number,
+    [LufeFinanceIndicatorFields.GrossUtilityCosts]?: number,
+    [LufeFinanceIndicatorFields.EbitVtas]?: number,
+    [LufeFinanceIndicatorFields.Ebit]?: number,
+    [LufeFinanceIndicatorFields.EbitdaVtas]?: number
+}

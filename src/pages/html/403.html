@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página en Mantenimiento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffffff;
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            column-gap: 4px;
+            justify-content: center;
+            align-items: center;
+        }
+        .titleContainer {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            row-gap: 4px;
+        }
+        .icon {
+            font-size: 48px;
+        }
+        .subtitle {
+            margin: 0px;
+            color: #9b9b9b;
+        }
+        .image {
+            width: 60vh;
+            height: auto;
+            margin-top: 40px;
+        }
+        .button {
+            background-color: #0666ad;
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-size: 16px;
+            margin-top: 60px;
+            margin-right: 10px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background-color: #0BB7AF;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="titleContainer">
+        <h1>En mantenimiento!</h1>
+        <div class="icon">🚧️</div>
+    </div>
+    <p class="subtitle">Perdone por los inconvenientes. Esta página se encuentra en desarrollo por el momento</p>
+    <img src="../../assets/img/misc-under-maintenance.png" alt="En mantenimiento" class="image">
+    <button class="button" onclick="window.location.href='/'">Volver al inicio</button>
+</div>
+</body>
+</html>

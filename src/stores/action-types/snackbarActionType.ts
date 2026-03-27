@@ -1,0 +1,5 @@
+﻿export enum SnackbarActionType {
+  ADD_SNACKBAR = 'ADD_SNACKBAR',
+  REMOVE_SNACKBAR = 'REMOVE_SNACKBAR',
+  CLEAR_SNACKBAR = 'CLEAR_SNACKBAR',
+}

@@ -1,0 +1,33 @@
+name: ✅ Disable Maintenance Mode
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_env:
+        description: 'Selecciona el entorno para ACTIVAR el sitio'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+jobs:
+  enable-maintenance:
+    name: Disable Maintenance on ${{ github.event.inputs.target_env }}
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.target_env }}
+    
+    steps:
+      - name: Delete maintenance files via FTP
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+
+          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" ${{ secrets.FTP_SERVER }} <<EOF
+          set ssl:verify-certificate no
+          cd /
+          rm -f app_offline.htm
+          rm -f .maintenance-state
+          bye
+          EOF

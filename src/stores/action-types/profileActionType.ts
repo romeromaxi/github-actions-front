@@ -1,0 +1,5 @@
+﻿export enum ProfileActionType {
+  SET_PROFILE = 'SET_PROFILE',
+  SET_COMPANY = 'SET_COMPANY',
+  RELOAD_PROFILE = 'RELOAD_PROFILE',
+}

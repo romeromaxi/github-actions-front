@@ -1,0 +1,72 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .captcha-container > div {
+    transform: scale(0.75);
+    transform-origin: 0;
+  }
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #4CAF50 !important;
+}
+
+@keyframes bell-ringing-shake {
+  0% { transform: rotate(0deg); }
+  2% { transform: rotate(15deg); }
+  4% { transform: rotate(-15deg); }
+  6% { transform: rotate(10deg); }
+  8% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.bell-ringing-shake {
+  animation: bell-ringing-shake 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+.grid-background-body {
+    background-image:
+            linear-gradient(270deg, rgba(246, 246, 246, 0) 0%, #f6f6f6 50%, rgba(246, 246, 246, 0) 100%),
+            url('assets/img/grid-background.png');
+    background-repeat: repeat repeat;
+    background-size: 100% 400px, auto;
+    background-position: center top, top left;
+}

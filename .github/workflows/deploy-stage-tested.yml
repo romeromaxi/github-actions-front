@@ -1,0 +1,56 @@
+name: "🚀 Deploy Stage TEST"
+
+run-name: Deploy Stage ${{ inputs.version }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Tag version (vX.X.X)'
+        required: true
+
+jobs:
+  deploy-stage:
+    # Solo permite que el Job se cree si la rama seleccionada en "Use workflow from" es 'stage'
+    if: github.ref == 'refs/heads/stage'
+    runs-on: ubuntu-latest
+    # Vinculamos con el entorno de GitHub para usar las secrets correspondientes
+    environment: staging
+    
+    steps:
+      - name: Validar rama de ejecución
+        if: github.ref != 'refs/heads/stage'
+        run: |
+          echo "❌ ERROR: Este deploy solo está permitido desde la rama 'stage'."
+          echo "Seleccionaste: ${{ github.ref }}"
+          exit 1
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download Front release asset
+        run: |
+          gh release download ${{ inputs.version }} \
+            --pattern "front-${{ inputs.version }}.zip" \
+            --repo ${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Unzip Front artifact
+        run: unzip front-${{ inputs.version }}.zip
+
+      - name: Inject Analytics Scripts
+        env:
+          SCRIPTS_CONTENT: ${{ secrets.INDEX_POST_BUILD_SCRIPTS }}
+        run: |
+          ESCAPED=$(printf '%s\n' "$SCRIPTS_CONTENT" | sed "s/[&\\]/\\\&/g; s/|/\\|/g")
+          sed -i "s|<!--INDEX_POST_BUILD_SCRIPTS-->|${ESCAPED}|g" index.html
+
+      - name: Deploy Test File to Stage
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./build
+          server-dir: /test

@@ -1,0 +1,50 @@
+name: Build & Release
+
+run-name: Build ${{ github.ref_name }}
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get version
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
+          CI: false
+        run: npm run build
+
+      - name: Inject version
+        run: |
+          echo "window.APP_VERSION='${{ steps.get_version.outputs.VERSION }}';" > build/version.js
+
+      - name: Zip build
+        run: zip -r front-${{ steps.get_version.outputs.VERSION }}.zip build/
+
+      - name: Upload Front artifact
+        uses: softprops/action-gh-release@v2
+        with:
+          files: front-${{ steps.get_version.outputs.VERSION }}.zip

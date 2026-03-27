@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glosario</title>
+  <link rel="stylesheet" href="/guides/styles.css">
+</head>
+<script>
+  function navigateTo(page) {
+    window.parent.postMessage({ type: 'navigate-instructivo-ayuda', page }, '*');
+  }
+
+  function notifyHeight() {
+    const height = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'resize-iframe-ayuda', height }, '*');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    notifyHeight();
+
+    document.querySelectorAll('a[href$=".html"]').forEach((link) => {
+      const href = link.getAttribute('href');
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        navigateTo(href);
+      });
+    });
+
+    const resizeObserver = new ResizeObserver(() => {
+      notifyHeight();
+    });
+    resizeObserver.observe(document.body);
+
+
+    setTimeout(notifyHeight, 1000);
+  });
+
+  window.addEventListener('load', notifyHeight);
+</script>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="ver-como-me-ven.html">Ver cómo me ven</a></li>
+        <li><a class="nav-links-selected" href="glosario.html">Glosario</a></li>
+        <li>
+          <a class="nav-links-disabled tooltip" href="informacion-util.html">
+            Información Útil
+            <span class="tooltip-text">Próximamente...</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-links-disabled tooltip" href="articulos.html">
+            Artículos
+            <span class="tooltip-text">Próximamente...</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-links-disabled tooltip" href="capacitacion.html">
+            Capacitación
+            <span class="tooltip-text">Próximamente...</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="contenido">
+      <h1 class="main-title">Glosario</h1>
+      <div class="faq-buscador">
+        <input type="text" id="glosarioSearch" placeholder="Buscar término...">
+      </div>
+      <nav class="glosario-indice-horizontal">
+        <ul id="indiceLetras">
+          <li><button type="button" class="letra-btn" data-letra="A">A</button></li>
+          <li><button type="button" class="letra-btn" data-letra="B">B</button></li>
+          <li><button type="button" class="letra-btn" data-letra="C">C</button></li>
+          <li><button type="button" class="letra-btn" data-letra="D">D</button></li>
+          <li><button type="button" class="letra-btn" data-letra="E">E</button></li>
+          <li><button type="button" class="letra-btn" data-letra="F">F</button></li>
+          <li><button type="button" class="letra-btn" data-letra="G">G</button></li>
+          <li><button type="button" class="letra-btn" data-letra="H">H</button></li>
+          <li><button type="button" class="letra-btn" data-letra="I">I</button></li>
+          <li><button type="button" class="letra-btn" data-letra="J">J</button></li>
+          <li><button type="button" class="letra-btn" data-letra="K">K</button></li>
+          <li><button type="button" class="letra-btn" data-letra="L">L</button></li>
+          <li><button type="button" class="letra-btn" data-letra="M">M</button></li>
+          <li><button type="button" class="letra-btn" data-letra="N">N</button></li>
+          <li><button type="button" class="letra-btn" data-letra="O">O</button></li>
+          <li><button type="button" class="letra-btn" data-letra="P">P</button></li>
+          <li><button type="button" class="letra-btn" data-letra="Q">Q</button></li>
+          <li><button type="button" class="letra-btn" data-letra="R">R</button></li>
+          <li><button type="button" class="letra-btn" data-letra="S">S</button></li>
+          <li><button type="button" class="letra-btn" data-letra="T">T</button></li>
+          <li><button type="button" class="letra-btn" data-letra="U">U</button></li>
+          <li><button type="button" class="letra-btn" data-letra="V">V</button></li>
+          <li><button type="button" class="letra-btn" data-letra="W">W</button></li>
+          <li><button type="button" class="letra-btn" data-letra="X">X</button></li>
+          <li><button type="button" class="letra-btn" data-letra="Y">Y</button></li>
+          <li><button type="button" class="letra-btn" data-letra="Z">Z</button></li>
+          <li><button type="button" class="letra-btn" data-letra="TODAS">VER TODAS</button></li>
+        </ul>
+      </nav>
+      <div id="glosario-letras-container">
+        <!-- Aquí se insertarán dinámicamente las palabras por letra -->
+      </div>
+    </section>
+  </main>
+  <script>
+    // --- GLOSARIO DATA ---
+    const glosarioData = {
+      "A": [
+        { palabra: "ALyCs", definicion: "Se llama así a los Agentes de Liquidación y Compensación, que son las entidades autorizadas y reguladas que intervienen en la liquidación y compensación de operaciones, facilitan la compra y venta de activos financieros, como acciones y bonos, entre los inversores y los mercados financieros." },
+        { palabra: "Amortización", definicion: "La amortización es el proceso de devolver una deuda a través de pagos periódicos que cubren el monto original del préstamo y los intereses." },
+        { palabra: "Análisis de riesgo crediticio / Calificación crediticia", definicion: "El análisis de riesgo crediticio es la evaluación de la capacidad de pago y la solvencia que una persona o empresa tiene para cumplir con sus obligaciones financieras. Para ello las entidades analizan información disponible en Bases públicas (Ej.ARCA, BCRA/CENDEU) y la historia de cumplimiento de obligaciones y la proyección de crecimiento y financiera. Las entidades suelen pedir datos de facturación, balances y consultar a bureau de crédito para este análisis o precalificación. Este es el análisis que determina cuánto se le puede financiar o prestar" },
+        { palabra: "Aval", definicion: "Los avales son los documentos que emite una entidad como respaldo o garantía a un tercero. Por ejemplo, una Sociedad de Garantía Recíproca emite un aval a una empresa para tomar un préstamo o para respaldar operaciones con una entidad bancaria. Con este aval las entidades financiadoras otorgan una opción que sin este respaldo la empresa no tendría o un mayor monto, mejores tasas y/o plazos, según corresponda. Suele ser requerido con la finalidad de garantizar la amortización de un préstamo, asegurar el cumplimiento de otras obligaciones" }
+      ],
+      "C": [
+        { palabra: "Capital de trabajo", definicion: "Es el dinero para llevar a cabo las operaciones cotidianas del negocio, como pagar empleados y proveedores. Es el dinero disponible para cumplir obligaciones de corto plazo." },
+        { palabra: "CASFOG", definicion: "Cámara Argentina de Soiedades y Fondos de Garantía. Agrupa a todas las Sociedades y Fondos de Garantía del país con el fin de fortalecer el sistema de garantías a MIPYMES de todo el país." },
+        { palabra: "CENDEU", definicion: "Es la central de deudores del sistema financiero del BCRA. Recoge datos acerca de las personas humanas y jurídicas que tienen algún tipo de financiación: préstamos, tarjeta de crédito, descubierto en cuenta corriente, compra en cuotas, etc. e informa deudas actuales e históricas (24 meses) en entidades financieras, empresas no financieras emisoras de tarjetas de crédito y/ compra y, otros proveedores no financieros de crédito, fideicomisos financieros, sociedades de garantía recíproca, fondos de garantía de carácter público y proveedores de servicios de créditos entre particulares a través de plataformas, detallando la totalidad de las financiaciones con la correspondiente situación de cada deudor (si está al día, atrasado, si no paga y los montos)" },
+        { palabra: "Certificado PyME", definicion: "Es un documento que acredita la condición como MiPyME ante la AFIP, la Secretaría de Industria y Desarrollo Productivo y terceros organismos e instituciones. Permite acceder a financiamiento, beneficios impositivos y programas de asistencia para tu empresa. Se tramita en AFIP." },
+        { palabra: "CFI", definicion: "El Consejo Federal de Inversiones es un organismo público interestadual formado por todas las provincias argentinas. Está dedicado al apoyo a la innovación y planificación de inversiones para el desarrollo integral del país. Asistie y acompaña a las provincias a través de diversos programas entre los cuales existen algunos destinados a instrumentos para promover la inclusión financiera de micro, pequeñas y medianas empresas de sectores productivos de las provincias argentinas." },
+        { palabra: "CPD (Cheque de pago diferido)", definicion: "Los cheques diferidos son aquellos emitidos en una fecha para ser presentados al cobro en una fecha posterior." },
+        { palabra: "CNV", definicion: "La Comisión Nacional de Valores es un organismo autárquico que funciona bajo la órbita del Ministerio de Economía y es el encargado de la promoción, supervisión y control del mercado de capitales." },
+        { palabra: "Contragarantía", definicion: "Garantía otorgada a favor del garante de una deuda ajena para el caso de que se vea obligado a cumplirla. Por ejemplo, un banco o una SGR garantiza el cumplimiento de las obligaciones contraídas por un cliente, pero al mismo tiempo se cubre del riesgo de esta operación exigiendo al propio cliente un respaldo o contragarantía que dé cobertura a dicho riesgo." }
+      ],
+      "E": [
+        { palabra: "Echeq", definicion: "Es un cheque librado por medios electrónicos que puede ser endosado, avalado, negociado, puesto en custodia, cedido y depositado en forma electrónica. Todos los bancos están obligados a recibir un ECHEQ y permitir su depósito." },
+        { palabra: "Estado de resultados", definicion: "En contabilidad, el estado de resultados, estado de rendimiento económico o estado de pérdidas y ganancias, es un estado financiero que muestra ordenada y detalladamente cómo se obtuvo el resultado del ejercicio durante un periodo determinado." }
+      ],
+      "F": [
+        { palabra: "Fideicomiso financiero", definicion: "El fideicomiso es un acto jurídico por medio del cual una persona entrega a otra la titularidad de unos activos para que los administre. Los fideicomisos financieros son instrumentos bursátiles que las empresas utilizan para captar fondos y financiar sus operaciones a través del Mercado de Capitales. Son una alternativa de inversión que permite a los inversores participar de proyectos o de un cobro futuro determinado a través de una colocación de deuda o una participación de capital proyectos sin asumir el riesgo de la empresa que lo genera." },
+        { palabra: "Fondo de Garantía", definicion: "Los Fondos de Garantía Públicos (FGP) son fondos constituidos en el ámbito del Estado Nacional o provincial con el objetivo de otorgar garantías a MiPymes (Micro, Pequeñas y Medianas empresas). Estas garantías se constituyen para que las empresas puedan acceder en mejores condiciones al financiamiento en instituciones bancarias y en el mercado de capitales." }
+      ],
+      "G": [
+        { palabra: "Garantía personal", definicion: "Compromiso que asume una persona -denominada fiador- para responder por las obligaciones de un tercero, en caso de que este no cumpla con sus compromisos financieros o contractuales." },
+        { palabra: "Garantía real", definicion: "Es aquella garantía en la que el deudor (el que se compromete al pago de la deuda contraída con una institución), ofrece como resguardo un bien propio o de otra persona, y que puede recaer en un bien inmueble (una casa) o un mueble (un camión)." }
+      ],
+      "I": [
+        { palabra: "Inversión productiva", definicion: "Es la inversión en activos de la empresa que tienen una aplicación concreta y directa en los procesos productivos de la misma y que serán utilizados durante un largo periodo de tiempo para cumplir con el objetivo de la misma. Por ej. Compra de maquinaria, inversión en locaciones." }
+      ],
+      "L": [
+        { palabra: "Leasing", definicion: "Es un método de financiación que permite adquirir bienes mientras los usás. Es como un alquiler de un bien con opción a compra al final de un período." },
+        { palabra: "Legajo de contacto", definicion: "Es un formulario que contiene los datos de la empresa que las entidades requieren habitualmente para poder avanzar con la solicitud. Contienela información que permite comprender las características de la empresa si se ajusta para continuar el proceso de evaluación crediticia o precalificación. A partir de allí, según el producto, serán requeridos más documentos o datos, pero ese primer contacto organizado ayuda a continuar o cancelar rápidamente y tiene la ventaja de poder ser reutilizado para aplicar a múltiples propuestas, editarlo y mantenerlo actualizado siempre disponible." },
+        { palabra: "LUFE", definicion: "El Legajo Único Financiero Económico (LUFE) tiene como principal objetivo la consolidación y estandarización de la documentación e información económica, financiera y contable de las Micro, Pequeñas y Medianas Empresas. Permite simplificar los trámites de sus gestiones crediticias y agilizar de ese modo su acceso al financiamiento.Cada empresa puede acceder a su propio legajo y también acceden la Secretaria de la Pequeña y Mediana Empresa, y las entidades financieras y de avales que tengan convenio para hacerlo. Se acepta a través de ARCA." }
+      ],
+      "O": [
+        { palabra: "Obligaciones Negociables (ONs)", definicion: "Son instrumentos de deuda emitidos por empresas, que pueden comprarse y venderse todos los días hábiles en el mercado. Se trata de un activo de Renta Fija. También se lo conoce como bono corporativo, se puede acceder con pesos o dólares." }
+      ],
+      "P": [
+        { palabra: "Precalificación", definicion: "Es el proceso mediante el cual el BANCO o entidad financiadora o avalista realiza un análisis de la empresa que está solicitando financiamiento o aval para determinar una posible viabilidad de crédito, el cupo para operar con tarjetas de crédito y cuentas o el aval a otorgar. También determina muchas veces una categoría de cliente." },
+        { palabra: "Prestamos flexibles con Garantía Hipotecaria", definicion: "Este tipo de financiación es ideal para los proyectos en los que se necesita garantizar varias operaciones crediticias o bien se planifica que las financiaciones otorgadas serán renovadas durante la vigencia de la hipoteca. El Préstamo Flexible permite acceder a un importante ahorro en los gastos asociados a la operación (honorarios de inscripción de hipoteca, aranceles, impuestos, etc.) en comparación con la alternativa de constituir una hipoteca específica para cada financiación. También permite garantizar las futuras operaciones de crédito sin necesidad de constituir garantías adicionales cada vez." },
+        { palabra: "Préstamos Prendarios", definicion: "Un préstamo prendario es un tipo de préstamo en el que el beneficiario entrega un bien como garantía para respaldar el préstamo. Este bien se conoce como 'prenda' El prestamista se queda con la custodia del bien hasta que el préstamo se cancela por completo. Si el beneficiario no puede pagar el préstamo, el prestamista puede embargar y vender el bien para recuperar su inversión." }
+      ],
+      "R": [
+        { palabra: "Riesgo crediticio", definicion: "Se llama así a la probabilidad de pérdida debida al impago por parte de un prestatario de cualquier tipo de deuda. En función del riesgo considerado se determina si se le puede prestar, cuánto y a qué plazos y tasas." }
+      ],
+      "S": [
+        { palabra: "Score de crédito", definicion: "Es un valor que se obtiene del registro detallado de los hábitos de pago y posibilidades financieras. Existen diferentes SCORE, suelen ser indicados por los bureau de crédito en función del historial. Es clave para que las entidades financieras entiendan tu perfil antes de ofrecerte cualquier producto. Mantener un historial de crédito positivo es muy importante para estar siempre en condiciones. LUC acerca estos datos a las MiPYMES a través del módulo 'ver cómo te ven'." },
+        { palabra: "Seguro de caución", definicion: "El seguro de caución, o seguro de garantía, es aquel contrato de seguro mediante el cual el asegurador se obliga a indemnizar al asegurado por los perjuicios que sufra en caso de que el tomador del seguro incumpla las obligaciones, legales o contractuales, que mantenga con este." },
+        { palabra: "Sindicados", definicion: "CASFOG agrupa a las Sociedades de Garantía Reciproca (SGR) y a los Fondos de Garantia (Fondo) con el fin de emitir garantias en forma CONJUNTA y de manera COORDINADA para acompañar a las PyMES en su acceso al financiamiento. Esta agrupación de entidades de garantia se denomina SINDICADO CASFOG y se encuentra liderada por una SGR/Fondo organizadora quien, junto a la CASFOG, acompaña a la PyME en el proceso hasta obtener su GARANTIA SINDICADA." },
+        { palabra: "Sociedad de Garantía Recíproca (SGR)", definicion: "Tienen como objetivo facilitar el acceso al crédito a las MiPyMES otorgando garantías que mejoran sus condiciones de financiamiento en las entidades financieras, mercado de capitales, organismos públicos y proveedores." }
+      ]
+      // ... puedes seguir agregando más letras y palabras según el glosario oficial ...
+    };
+
+    // --- INTERACCIÓN ---
+    const letrasBtns = document.querySelectorAll('.letra-btn');
+    const glosarioLetrasContainer = document.getElementById('glosario-letras-container');
+    const glosarioSearch = document.getElementById('glosarioSearch');
+    let letraAbierta = null;
+    let palabraAbierta = null;
+
+    letrasBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const letra = btn.getAttribute('data-letra');
+        mostrarPalabrasPorLetra(letra);
+      });
+    });
+
+    // Funcionalidad del buscador
+    glosarioSearch.addEventListener('input', function() {
+      const filtro = this.value.toLowerCase();
+      if (filtro === '') {
+        // Si el buscador está vacío, mostrar la letra actual o limpiar
+        if (letraAbierta) {
+          mostrarPalabrasPorLetra(letraAbierta);
+        } else {
+          glosarioLetrasContainer.innerHTML = '';
+        }
+        return;
+      }
+      
+      // Buscar en todo el glosario
+      const resultados = [];
+      Object.keys(glosarioData).forEach(letra => {
+        glosarioData[letra].forEach(item => {
+          if (item.palabra.toLowerCase().includes(filtro) || 
+              item.definicion.toLowerCase().includes(filtro)) {
+            resultados.push({...item, letra: letra});
+          }
+        });
+      });
+      
+      mostrarResultadosBusqueda(resultados);
+    });
+
+    function mostrarResultadosBusqueda(resultados) {
+      glosarioLetrasContainer.innerHTML = '';
+      if (resultados.length === 0) {
+        glosarioLetrasContainer.innerHTML = '<div class="glosario-sin-palabras">No se encontraron términos que coincidan con tu búsqueda.</div>';
+        return;
+      }
+      
+      const lista = document.createElement('ul');
+      lista.className = 'glosario-palabras-lista';
+      resultados.forEach((item, idx) => {
+        const li = document.createElement('li');
+        li.className = 'glosario-palabra-item';
+        const btnPalabra = document.createElement('button');
+        btnPalabra.type = 'button';
+        btnPalabra.className = 'glosario-palabra-btn';
+        btnPalabra.innerHTML = `<span class="palabra-texto">${item.palabra}</span><span class="palabra-letra">(${item.letra})</span>`;
+        btnPalabra.addEventListener('click', () => mostrarDefinicionPalabraBusqueda(item, li));
+        li.appendChild(btnPalabra);
+        lista.appendChild(li);
+      });
+      glosarioLetrasContainer.appendChild(lista);
+    }
+
+    function mostrarDefinicionPalabraBusqueda(item, liElemento) {
+      const definicionExistente = liElemento.querySelector('.glosario-definicion');
+      if (definicionExistente) {
+        definicionExistente.remove();
+        return;
+      }
+      
+      document.querySelectorAll('.glosario-definicion').forEach(el => el.remove());
+      const defDiv = document.createElement('div');
+      defDiv.className = 'glosario-definicion';
+      defDiv.innerHTML = `<strong>${item.palabra}</strong><div class='glosario-definicion-texto'>${item.definicion}</div>`;
+      liElemento.appendChild(defDiv);
+    }
+
+    function mostrarPalabrasPorLetra(letra) {
+      glosarioLetrasContainer.innerHTML = '';
+      letraAbierta = letra;
+      palabraAbierta = null;
+      
+      if (letra === 'TODAS') {
+        // Mostrar todas las palabras del glosario
+        const todasLasPalabras = [];
+        Object.keys(glosarioData).forEach(letraKey => {
+          glosarioData[letraKey].forEach(item => {
+            todasLasPalabras.push({...item, letra: letraKey});
+          });
+        });
+        
+        if (todasLasPalabras.length === 0) {
+          glosarioLetrasContainer.innerHTML = `<div class='glosario-sin-palabras'>No hay términos en el glosario.</div>`;
+          return;
+        }
+        
+        const lista = document.createElement('ul');
+        lista.className = 'glosario-palabras-lista';
+        todasLasPalabras.forEach((item, idx) => {
+          const li = document.createElement('li');
+          li.className = 'glosario-palabra-item';
+          const btnPalabra = document.createElement('button');
+          btnPalabra.type = 'button';
+          btnPalabra.className = 'glosario-palabra-btn';
+          btnPalabra.innerHTML = `<span class="palabra-texto">${item.palabra}</span><span class="palabra-letra">(${item.letra})</span>`;
+          btnPalabra.addEventListener('click', () => mostrarDefinicionPalabraBusqueda(item, li));
+          li.appendChild(btnPalabra);
+          lista.appendChild(li);
+        });
+        glosarioLetrasContainer.appendChild(lista);
+        return;
+      }
+      
+      if (!glosarioData[letra] || glosarioData[letra].length === 0) {
+        glosarioLetrasContainer.innerHTML = `<div class='glosario-sin-palabras'>No hay términos para esta letra.</div>`;
+        return;
+      }
+      const lista = document.createElement('ul');
+      lista.className = 'glosario-palabras-lista';
+      glosarioData[letra].forEach((item, idx) => {
+        const li = document.createElement('li');
+        li.className = 'glosario-palabra-item';
+        const btnPalabra = document.createElement('button');
+        btnPalabra.type = 'button';
+        btnPalabra.className = 'glosario-palabra-btn';
+        btnPalabra.textContent = item.palabra;
+        btnPalabra.addEventListener('click', () => mostrarDefinicionPalabra(letra, idx, li));
+        li.appendChild(btnPalabra);
+        lista.appendChild(li);
+      });
+      glosarioLetrasContainer.appendChild(lista);
+    }
+
+    function mostrarDefinicionPalabra(letra, idx, liElemento) {
+      // Verificar si ya hay una definición abierta para esta palabra
+      const definicionExistente = liElemento.querySelector('.glosario-definicion');
+      if (definicionExistente) {
+        // Si ya está abierta, la cerramos
+        definicionExistente.remove();
+        palabraAbierta = null;
+        return;
+      }
+      
+      // Cerrar cualquier otra definición abierta
+      document.querySelectorAll('.glosario-definicion').forEach(el => el.remove());
+      palabraAbierta = idx;
+      const item = glosarioData[letra][idx];
+      const defDiv = document.createElement('div');
+      defDiv.className = 'glosario-definicion';
+      defDiv.innerHTML = `<strong>${item.palabra}</strong><div class='glosario-definicion-texto'>${item.definicion}</div>`;
+      liElemento.appendChild(defDiv);
+    }
+  </script>
+</body>
+</html> 

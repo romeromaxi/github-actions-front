@@ -1,0 +1,81 @@
+name: "🚀 Deploy Stage"
+
+run-name: Deploy Stage ${{ inputs.version }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Tag version (vX.X.X)'
+        required: true
+        
+jobs:
+  enable-maintenance:
+    if: github.ref == 'refs/heads/stage'
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Validar rama de ejecución
+        if: github.ref != 'refs/heads/stage'
+        run: |
+          echo "❌ ERROR: Este deploy solo está permitido desde la rama 'stage'."
+          echo "Seleccionaste: ${{ github.ref }}"
+          exit 1
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Upload Maintenance Page
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./design/
+          server-dir: /
+          include: |
+            app_offline.htm
+          strip-components: 1
+          state-name: .maintenance-state
+          
+  deploy-stage:
+    # Solo permite que el Job se cree si la rama seleccionada en "Use workflow from" es 'stage'
+    if: github.ref == 'refs/heads/stage'
+    needs: enable-maintenance
+    runs-on: ubuntu-latest
+    # Vinculamos con el entorno de GitHub para usar las secrets correspondientes
+    environment: staging
+    
+    steps:
+      - name: Validar rama de ejecución
+        if: github.ref != 'refs/heads/stage'
+        run: |
+          echo "❌ ERROR: Este deploy solo está permitido desde la rama 'stage'."
+          echo "Seleccionaste: ${{ github.ref }}"
+          exit 1
+            
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Download Front release asset
+        run: |
+          gh release download ${{ inputs.version }} \
+            --pattern "front-${{ inputs.version }}.zip" \
+            --repo ${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+      - name: Unzip Front artifact
+        run: unzip front-${{ inputs.version }}.zip
+            
+      - name: Deploy Front to Stage
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./build/
+          server-dir: /
+          exclude: |
+            **/configuration.js
+            **/manifest.json

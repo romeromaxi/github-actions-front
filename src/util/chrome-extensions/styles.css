@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Yantramanav:wght@100;300;400;500;700;900&display=swap');
+
+.extension-body {
+    background-color: #f0f0f0;
+    width: 450px;
+    display: block;
+    padding: 10px 0;
+}
+
+.main-text {
+    color: #3079ce;
+    font-size: 22px;
+    text-align: center;
+    font-family: "Yantramanav", sans-serif;
+    font-weight: 600;
+}
+
+.content-text {
+    font-size: 13px;
+    text-align: center;
+    font-family: "Yantramanav", sans-serif;
+}
+
+.mui-button {
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid #007bff;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    border-radius: 4px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.mui-button:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    cursor: pointer;
+}
+
+.mui-button:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.mui-button:active {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.mui-button:disabled {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.import-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.file-container {
+    display: flex;
+    gap: 6px;
+}
+
+.file-name {
+    font-size: 13px;
+    font-weight: 600;
+    font-family: "Yantramanav", sans-serif;
+}
+
+#import-view {
+    display: none;
+}
+
+#login-button {
+    margin-top: 12px;
+    width: 20%;
+}
+
+.login-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.custom-input {
+    display: block;
+    padding: 0.4rem;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.custom-input:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.custom-input.error {
+    border-color: #dc3545;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    margin: 0 auto;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+#loader-login {
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

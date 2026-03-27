@@ -1,0 +1,255 @@
+﻿import React, { useCallback, useEffect, useState } from 'react';
+import {
+  EntityFilterPagination,
+  EntityListWithPagination,
+  EntityListWithPaginationFields,
+  EntityPagination,
+  EntityPaginationFields,
+  EntityWithIdFields,
+} from '../../../../types/baseEntities';
+import {
+  Document,
+  DocumentFields,
+  FileBaseFields,
+  FileBlobResponse,
+  FileBlobResponseFields,
+} from '../../../../types/files/filesData';
+import { useForm } from 'react-hook-form';
+import { HttpFileDocument, HttpFilesCompany } from '../../../../http';
+import { ITableColumn, TableWithPaging } from '../../../../components/table';
+import { Grid, Stack, Typography } from '@mui/material';
+import { dateFormatter } from '../../../../util/formatters/dateFormatter';
+import {
+  DeleteIconButton,
+  DownloadIconButton,
+  SearchButton,
+} from '../../../../components/buttons/Buttons';
+import { Sections } from '../../../../types/general/generalEnums';
+import { ControlledTextFieldFilled } from '../../../../components/forms';
+import { fileFormatter } from '../../../../util/formatters/fileFormatter';
+
+interface CompanyLibraryPresentationsProps {
+  companyId: number;
+}
+
+enum PresentationsFileFilterFields {
+  ReportId = 'idReporte',
+}
+
+interface PresentationFileFilter extends EntityFilterPagination {
+  [PresentationsFileFilterFields.ReportId]?: number;
+}
+
+const defaultPagination: EntityPagination = {
+  [EntityPaginationFields.CantPages]: 1,
+  [EntityPaginationFields.ActualPage]: 1,
+  [EntityPaginationFields.CantRecords]: 1,
+  [EntityPaginationFields.PageSize]: 10,
+};
+const CompanyLibraryPresentations = ({
+  companyId,
+}: CompanyLibraryPresentationsProps) => {
+  const [error, setError] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [filesCompany, setFilesCompany] =
+    useState<EntityListWithPagination<Document>>();
+  const [libraryFilter, setLibraryFilter] = useState<PresentationFileFilter>({
+    [EntityPaginationFields.PageSize]: 10,
+    [EntityPaginationFields.ActualPage]: 1,
+  });
+  const [shouldSearch, setShouldSearch] = useState<boolean>(true);
+
+  const { control, handleSubmit } = useForm<PresentationFileFilter>({
+    defaultValues: {
+      ...libraryFilter,
+    },
+  });
+
+  const onDownload = (file: Document) => {
+    const isFolder: boolean = file[DocumentFields.NumberFiles] > 1;
+
+    HttpFileDocument.download(file[EntityWithIdFields.Id]).then(
+      (blobResponse: FileBlobResponse) => {
+        const downloadUrl = window.URL.createObjectURL(
+          new Blob([blobResponse[FileBlobResponseFields.File]]),
+        );
+
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+
+        let downloadName: string = isFolder
+          ? `${file[DocumentFields.TitleDocument]}.zip`
+          : file[DocumentFields.FileDesc];
+
+        link.setAttribute('download', downloadName);
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      },
+    );
+  };
+
+  const onDelete = (file: Document) => {
+    HttpFileDocument.delete(file[EntityWithIdFields.Id]).then(() => {
+      setShouldSearch(true);
+    });
+  };
+
+  const columns: ITableColumn[] = [
+    {
+      label: 'Archivo',
+      textAlign: 'left',
+      onRenderCell: (file: Document) => (
+        <Grid container alignItems={'center'} spacing={2}>
+          <Grid item xs={3} md={1.5}>
+            {file[DocumentFields.NumberFiles] > 1
+              ? fileFormatter.getIconFolder({ fontSize: 'large' })
+              : fileFormatter.getIconByFileName(file[DocumentFields.FileDesc], {
+                  fontSize: 'large',
+                })}
+          </Grid>
+          <Grid item xs={9} md={10.5} textAlign={'left'}>
+            <Typography>{file[DocumentFields.FileDesc]}</Typography>
+          </Grid>
+        </Grid>
+      ),
+    },
+    {
+      label: 'Persona',
+      onRenderCell: () => <Typography>*Persona*</Typography>,
+    },
+    {
+      label: 'Fecha actualizac. info.',
+      onRenderCell: () => <Typography>01/01/2023</Typography>,
+    },
+    {
+      label: 'Fecha Subida',
+      onRenderCell: (file: Document) => (
+        <Typography>
+          {dateFormatter.toShortDate(file[DocumentFields.BeginDate])}
+        </Typography>
+      ),
+    },
+    {
+      label: 'Peso',
+      onRenderCell: (file: Document) => (
+        <Typography>{`${Math.floor(file[DocumentFields.FileSize] / 1000)} Kb`}</Typography>
+      ),
+    },
+    {
+      label: 'Acciones',
+      onRenderCell: (file: Document) => (
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <DownloadIconButton
+            onClick={() => {
+              onDownload(file);
+            }}
+            tooltipTitle={'Descargar'}
+          />
+          <DeleteIconButton
+            onClick={() => {
+              onDelete(file);
+            }}
+            tooltipTitle={'Eliminar'}
+          />
+        </Stack>
+      ),
+    },
+  ];
+
+  const searchDocuments = useCallback(() => {
+    setFilesCompany(undefined);
+    setLoading(true);
+    HttpFilesCompany.getFilesByIdCompany(companyId)
+      .then((r) => {
+        const files: EntityListWithPagination<Document> = {
+          [EntityListWithPaginationFields.List]: r.filter(
+            (x) => x[FileBaseFields.FileSectionCode] === Sections.Presentations,
+          ),
+          [EntityListWithPaginationFields.Pagination]: defaultPagination,
+        };
+
+        setFilesCompany(files);
+        setLoading(false);
+        setShouldSearch(false);
+      })
+      .catch(() => setError(true));
+  }, [libraryFilter]);
+
+  useEffect(() => {
+    shouldSearch && searchDocuments();
+  }, [searchDocuments, shouldSearch]);
+
+  const onPaging = useCallback(
+    (page: number) => {
+      setLibraryFilter({
+        ...libraryFilter,
+        [EntityPaginationFields.ActualPage]: page,
+      });
+
+      setShouldSearch(true);
+    },
+    [libraryFilter],
+  );
+
+  const onSubmit = (data: PresentationFileFilter) => {
+    setLibraryFilter({ ...data });
+    setShouldSearch(true);
+  };
+
+  const renderTitle = () => {
+    return (
+      <Grid container spacing={3} alignItems="center" pb={2}>
+        <Grid item xs={5}>
+          <Typography variant="h5" sx={{ fontWeight: 600 }}>
+            Documentación Respaldatoria
+          </Typography>
+        </Grid>
+        <Grid item xs={7}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Grid
+              spacing={3}
+              direction="row"
+              alignItems="center"
+              container
+              justifyContent="flex-end"
+            >
+              <Grid item xs={6}></Grid>
+              <Grid item xs={4}>
+                <ControlledTextFieldFilled
+                  label="Persona"
+                  control={control}
+                  name={PresentationsFileFilterFields.ReportId}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={2}>
+                <SearchButton type="submit" fullWidth>
+                  Buscar
+                </SearchButton>
+              </Grid>
+            </Grid>
+          </form>
+        </Grid>
+      </Grid>
+    );
+  };
+
+  return (
+    <Grid container>
+      <Grid item xs={12}>
+        <TableWithPaging
+          title={renderTitle()}
+          entityPaginada={filesCompany}
+          columns={columns}
+          isLoading={loading}
+          error={error}
+          onPaging={onPaging}
+        />
+      </Grid>
+    </Grid>
+  );
+};
+
+export default CompanyLibraryPresentations;

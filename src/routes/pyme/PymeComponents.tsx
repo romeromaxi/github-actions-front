@@ -1,0 +1,14 @@
+export { default as SafetyRouteMiddleware } from "components/security/SafetyRouteMiddleware";
+export { default as LayoutLoggedUserCompanyFileMarket } from "layouts/LayoutLoggedUserCompanyFileMarket";
+export { default as HomeUserNotifications } from "pages/user/notifications/HomeUserNotifications";
+export { default as UserNotificationDetail } from "pages/user/notifications/UserNotificationDetail";
+export { default as CompanyPersonalInformationHome } from "pages/companyFile/company/CompanyPersonalInformationHome";
+export { default as CompanySolicitationContext } from "pages/company/solicitations/CompanySolicitationContext";
+export { default as CompanySolicitationPage } from "pages/company/solicitations/CompanySolicitationPage";
+export { default as LayoutHome } from "layouts/home/LayoutHome";
+export { default as LayoutUserLogged } from "layouts/LayoutUserLogged";
+export { default as HomeCompanyUser } from "pages/company/HomeCompanyUser";
+export { default as HomeCompanyPage } from "pages/company/HomeCompanyPage";
+export { default as CreateCompanyPage } from "pages/company/newCompany/CreateCompanyPage";
+export { default as UserValidationPage } from "pages/user/validation/UserValidationPage";
+export { default as CompanySolicitationCompanyFilePage } from "pages/company/solicitations/CompanySolicitationCompanyFilePage";

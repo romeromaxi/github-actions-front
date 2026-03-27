@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  
+  <link href="https://fonts.googleapis.com/css?family=Encode%20Sans%3Ai%2Cbi%2C700%2C400%7CEncode%20Sans%20Condensed%3Ai%2Cbi%2C700%2C400&amp;display=swap" rel="stylesheet" nonce="">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body, input, textarea, button {
+      font-family: 'Encode Sans Condensed',serif;
+    }
+    
+    .label-input {
+      font-size: 16.0pt;
+      font-family: 'Encode Sans Condensed',serif;
+      font-weight: 700;
+      font-style: normal;
+      font-variant: normal;
+      vertical-align: baseline;
+      text-decoration: none;
+      display: block;
+      line-height: 1.2;
+      text-align: left;
+      margin-left: 0.0pt;
+      margin-right: 0.0pt;
+      padding-left: 0.0pt;
+      text-indent: 0.0pt;
+      margin-top: 6.0pt;
+    }
+
+    .button_send {
+      font-family: 'Encode Sans Condensed',serif;
+      background-color: rgba(23, 33, 52, 1);
+      color: rgba(249, 249, 249, 1);
+      border-color: rgba(23, 33, 52, 1);
+      width: calc(100% - 3%);
+      height: 30.0pt;
+      font-size: 15.0pt;
+      font-weight: 700;
+      font-style: normal;
+      text-align: center;
+    }
+    
+    .button_send:hover {
+      cursor: pointer;
+      box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .3), 0 2px 6px 2px rgba(60, 64, 67, .15);
+    }
+
+    .form-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-left: 40px;
+      padding-right: 40px;
+      align-items: stretch; /* Hace que las columnas tengan la misma altura */
+    }
+    .form-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-column label {
+      display: block;
+      margin-bottom: 5px;
+      width: calc(100% - 5%);
+    }
+
+    .form-column input {
+      width: calc(100% - 5%);
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    .form-column textarea {
+      width: calc(100% - 5%);
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      flex-grow: 1;
+      resize: vertical; /* Permite el redimensionamiento solo vertical */
+    }
+
+    .hidden { display: none; }
+    
+    .error {
+      border-color: red !important;
+    }
+    .error-message {
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      color: red;
+      font-size: 14px;
+    }
+
+    .container-response-message {
+      margin: 40px;
+    }
+
+    .container-alert {
+      padding: 8px 16px;
+      gap: 10px;
+      display: flex;
+    }
+
+    .icon-alert {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .alert-success { fill: rgb(46, 125, 50); }
+    .success-response-message {
+      color: rgb(30, 70, 32);
+      background-color: rgb(237, 247, 237);
+      bottom: -20px;
+      left: 0;
+      border-radius: 5px;
+    }
+    .container-alert-success {
+      color: rgb(30, 70, 32);
+      background-color: rgb(237, 247, 237);
+    }
+    
+    .alert-error { fill: rgb(211, 47, 47); }
+    .error-response-message {
+      color: rgb(95, 33, 32);
+      background-color: rgb(253, 237, 237);
+      bottom: -20px;
+      left: 0;
+      border-radius: 5px;
+    }
+    .container-alert-error {
+      color: rgb(95, 33, 32);
+      background-color: rgb(253, 237, 237);
+    }
+
+    .br-text {
+      display: block;
+    }
+    
+    @media (max-width: 700px) {
+      .form-container {
+        flex-direction: column;
+        padding: 0 20px;
+      }
+      .form-column {
+        padding-bottom: 0px;
+        flex: 100%;
+      }
+      .br-text {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+<form id="contactForm">
+<div class="form-container">
+  <div class="form-column">
+    <label class="label-input" for="name">
+      Nombre y Apellido
+    </label>
+    <input type="text" id="name" name="name" required>
+
+    <label class="label-input" for="email">
+      Email
+    </label>
+    <input type="email" id="email" name="email" required>
+
+    <label class="label-input" for="subject">
+      Asunto
+    </label>
+    <input type="text" id="subject" name="subject" required><br class="br-text"><br class="br-text">
+  </div>
+  <div class="form-column">
+    <label class="label-input" for="message">
+      Mensaje
+    </label>
+    <textarea id="message" name="message" required></textarea>
+
+    <button class="button_send" type="button" onclick="submitForm()">
+      Enviar
+    </button>
+  </div>
+</div>
+</form>
+
+<div id="successMessage" class="container-response-message success-response-message hidden">
+  <div class="container-alert container-alert-success">
+    <div class="icon-alert alert-success">
+      <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="SuccessOutlinedIcon"><path d="M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2, 4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0, 0 22,12M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"></path></svg>
+    </div>
+    <div class="message">Al parecer ocurrió un error. Por favor, intente en unos instantes.</div>
+  </div>
+</div>
+
+<div id="errorMessage" class="container-response-message error-response-message hidden">
+  <div class="container-alert container-alert-error">
+    <div class="icon-alert alert-error">
+      <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ErrorOutlineIcon">
+        <path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
+      </svg>
+    </div>
+    <div class="message">Al parecer ocurrió un error. Por favor, intente en unos instantes.</div>
+  </div>
+</div>
+
+<script>
+  function cleanForm(){
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('subject').value = '';
+    document.getElementById('message').value = '';
+  }
+  
+  function isValidForm(name, email, subject, message){
+    resetErrorMessage(name);
+    resetErrorMessage(email);
+    resetErrorMessage(subject);
+    resetErrorMessage(message);
+    
+    let valid = true;
+
+    if (!name.value) {
+      displayErrorMessage(name, 'Campo obligatorio');
+      valid = false;
+    }
+    if (!email.value) {
+      displayErrorMessage(email, 'Campo obligatorio');
+      valid = false;
+    }
+    if (!subject.value) {
+      displayErrorMessage(subject, 'Campo obligatorio');
+      valid = false;
+    }
+    if (!message.value) {
+      displayErrorMessage(message, 'Campo obligatorio');
+      valid = false;
+    }
+    
+    return valid;
+  }
+  
+  function submitForm() {
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const subject = document.getElementById('subject');
+    const message = document.getElementById('message');
+
+    if (!isValidForm(name, email, subject, message)) {
+      return;
+    }
+    
+    const formData = {
+      nombre: name.value,
+      mail: email.value,
+      asunto: subject.value,
+      mensaje: message.value,
+    }
+    
+    google.script.run.withSuccessHandler(function(responseText) {
+      try {
+        var response = JSON.parse(responseText);
+        if (response.tieneError) {
+          showErrorMessage(response.descripcionError);
+        } else {
+          showSuccessMessage('Formulario enviado con éxito. Revise su correo.')
+          cleanForm();
+        }
+      } catch (e) {
+        showErrorMessage('Al parecer ocurrió un error. Por favor, intente en unos instantes.');
+      }
+    }).withFailureHandler(function(error) {
+      showErrorMessage('Al parecer ocurrió un error. Por favor, intente en unos instantes.');
+    }).submitForm(formData);
+  }
+
+  function displayErrorMessage(element, message) {
+    element.classList.add('error');
+    let errorMessageElement = element.nextElementSibling;
+    if (!errorMessageElement || !errorMessageElement.classList.contains('error-message')) {
+      errorMessageElement = document.createElement('div');
+      errorMessageElement.className = 'error-message';
+      errorMessageElement.textContent = message;
+      element.parentNode.insertBefore(errorMessageElement, element.nextSibling);
+    }
+    errorMessageElement.style.display = 'contents';
+  }
+
+  function resetErrorMessage(element) {
+    element.classList.remove('error');
+    let errorMessageElement = element.nextElementSibling;
+    if (errorMessageElement && errorMessageElement.classList.contains('error-message')) {
+      errorMessageElement.style.display = 'none';
+    }
+  }
+
+  function showSuccessMessage(message) {
+    const successMessageElement = document.getElementById('successMessage');
+    showAlertMessage(message, successMessageElement);
+  }
+
+  function showErrorMessage(message) {
+    const errorMessageElement = document.getElementById('errorMessage');
+    showAlertMessage(message, errorMessageElement);
+  }
+  
+  function showAlertMessage(message, messageElement) {
+    const textMessageElement = messageElement.querySelector('.message');
+    textMessageElement.textContent = message
+    messageElement.classList.remove('hidden');
+    setTimeout(function() {
+      messageElement.classList.add('hidden');
+    }, 5000);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const inputs = document.querySelectorAll('input, textarea');
+    inputs.forEach(function(input) {
+      input.addEventListener('input', function() {
+        resetErrorMessage(input);
+      });
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto | LUC</title>
+  <link rel="stylesheet" href="/guides/styles.css">
+  <style>
+    .contacto-container {
+      width: 72vw;
+      max-width: 900px;
+      margin: 2.5rem auto 2rem auto;
+      padding-left: 2vw;
+      padding-right: 2vw;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      padding: 1.5rem 2rem 1.5rem 2rem;
+    }
+    .contacto-form label {
+      display: block;
+      margin-top: 1em;
+      margin-bottom: 0.4em;
+      font-weight: 500;
+      color: var(--verde-oscuro);
+    }
+    .contacto-form input,
+    .contacto-form textarea {
+      width: calc(100% - 1cm);
+      display: block;
+      margin-right: 0;
+      padding: 0.7em 1em;
+      margin-bottom: 0em;
+      border: 2px solid var(--verde-oscuro);
+      border-radius: 5px;
+      font-size: 1em;
+      font-family: inherit;
+      resize: vertical;
+    }
+    .contacto-form textarea {
+      min-height: 180px;
+      max-height: 350px;
+      margin-bottom: 1.2em;
+    }
+    .contacto-form .contacto-col:last-child button {
+      margin-top: auto;
+      align-self: flex-end;
+    }
+    .contacto-form button {
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      border: none;
+      border-radius: 5px;
+      padding: 0.8em 2.2em;
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .contacto-form button:hover {
+      background: var(--verde-claro);
+    }
+    .contacto-form {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .contacto-col {
+      flex: 1 1 300px;
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    @media (max-width: 700px) {
+      .contacto-form {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .contacto-container {
+        padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+      }
+    }
+
+    .hidden { display: none; }
+
+    .button_send_disabled:hover {
+      cursor: not-allowed;
+      box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .3), 0 2px 6px 2px rgba(60, 64, 67, .15);
+    }
+    
+    .container-alert {
+      padding: 8px 16px;
+      gap: 10px;
+      display: flex;
+    }
+
+    .icon-alert {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .alert-success { fill: rgb(46, 125, 50); }
+    .success-response-message {
+      color: rgb(30, 70, 32);
+      background-color: rgb(237, 247, 237);
+      bottom: -20px;
+      left: 0;
+      border-radius: 5px;
+    }
+    .container-alert-success {
+      color: rgb(30, 70, 32);
+      background-color: rgb(237, 247, 237);
+    }
+
+    .alert-error { fill: rgb(211, 47, 47); }
+    .error-response-message {
+      color: rgb(95, 33, 32);
+      background-color: rgb(253, 237, 237);
+      bottom: -20px;
+      left: 0;
+      border-radius: 5px;
+    }
+    .container-alert-error {
+      color: rgb(95, 33, 32);
+      background-color: rgb(253, 237, 237);
+    }
+
+    .error {
+      border-color: red !important;
+    }
+    .error-message {
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      color: red;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<script>
+  function navigateTo(page) {
+    window.parent.postMessage({ type: 'navigate-instructivo-ayuda', page }, '*');
+  }
+
+  function notifyHeight() {
+    const height = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'resize-iframe-ayuda', height }, '*');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    notifyHeight();
+
+    document.querySelectorAll('a[href$=".html"]').forEach((link) => {
+      const href = link.getAttribute('href');
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        navigateTo(href);
+      });
+    });
+
+    const resizeObserver = new ResizeObserver(() => {
+      notifyHeight();
+    });
+    resizeObserver.observe(document.body);
+
+
+    setTimeout(notifyHeight, 1000);
+  });
+
+  window.addEventListener('load', notifyHeight);
+</script>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="que-es-luc.html">¿Qué es LUC?</a></li>
+        <li><a href="soluciones.html">Soluciones LUC</a></li>
+        <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+        <li><a href="instructivos.html">Instructivos</a></li>
+        <li><a href="contacto.html" class="nav-links-selected activo">Contactanos</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h1>Contactanos</h1>
+
+    <div id="successMessage" class="container-response-message success-response-message hidden">
+      <div class="container-alert container-alert-success">
+        <div class="icon-alert alert-success">
+          <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="SuccessOutlinedIcon"><path d="M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2, 4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0, 0 22,12M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"></path></svg>
+        </div>
+        <div class="message">Al parecer ocurrió un error. Por favor, intente en unos instantes.</div>
+      </div>
+    </div>
+
+    <div id="errorMessage" class="container-response-message error-response-message hidden">
+      <div class="container-alert container-alert-error">
+        <div class="icon-alert alert-error">
+          <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ErrorOutlineIcon">
+            <path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
+          </svg>
+        </div>
+        <div class="message">Al parecer ocurrió un error. Por favor, intente en unos instantes.</div>
+      </div>
+    </div>
+    
+    <div class="contacto-container">
+      <form class="contacto-form" id="contactForm">
+        <div class="contacto-col">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" name="Nombre" required>
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="Email" required>
+          <label for="subject">Asunto</label>
+          <input type="text" id="subject" name="Asunto" required>
+        </div>
+        <div class="contacto-col">
+          <label for="message">Mensaje</label>
+          <textarea id="message" name="Mensaje" required></textarea>
+          <button id="btn_submit_form" class="button_send" type="button" onclick="submitForm()">Enviar</button>
+
+          <button id="btn_disabled_submit_form" class="button_send button_send_disabled hidden" type="button" onclick="" disabled="disabled">
+            Enviando...
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    function cleanForm(){
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('subject').value = '';
+      document.getElementById('message').value = '';
+    }
+
+    function isValidForm(name, email, subject, message){
+      resetErrorMessage(name);
+      resetErrorMessage(email);
+      resetErrorMessage(subject);
+      resetErrorMessage(message);
+
+      let valid = true;
+
+      if (!name.value) {
+        displayErrorMessage(name, 'Campo obligatorio');
+        valid = false;
+      }
+      if (!email.value) {
+        displayErrorMessage(email, 'Campo obligatorio');
+        valid = false;
+      }
+      if (!subject.value) {
+        displayErrorMessage(subject, 'Campo obligatorio');
+        valid = false;
+      }
+      if (!message.value) {
+        displayErrorMessage(message, 'Campo obligatorio');
+        valid = false;
+      }
+
+      return valid;
+    }
+
+    function submitForm() {
+      showLoadingButton();
+
+      const name = document.getElementById('name');
+      const email = document.getElementById('email');
+      const subject = document.getElementById('subject');
+      const message = document.getElementById('message');
+
+      if (!isValidForm(name, email, subject, message)) {
+        hideLoadingButton();
+        return;
+      }
+
+      const formData = {
+        nombre: name.value,
+        mail: email.value,
+        asunto: subject.value,
+        mensaje: message.value,
+      }
+
+      fetch("https://www.luc.com.ar/api/api/v1/sites/contacto", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+              .then(res => {
+                if (!res.ok) throw new Error("Error en la respuesta de la API");
+                return res.json();
+              })
+              .then(response => {
+                if (response.tieneError) {
+                  showErrorMessage(response.descripcionError);
+                } else {
+                  showSuccessMessage('Formulario enviado con éxito. Revise su correo.')
+                  cleanForm();
+                }
+                hideLoadingButton();
+              })
+              .catch(err => {
+                showErrorMessage('Al parecer ocurrió un error. Por favor, intente en unos instantes.');
+                hideLoadingButton();
+              });
+    }
+
+    function displayErrorMessage(element, message) {
+      element.classList.add('error');
+      let errorMessageElement = element.nextElementSibling;
+      if (!errorMessageElement || !errorMessageElement.classList.contains('error-message')) {
+        errorMessageElement = document.createElement('div');
+        errorMessageElement.className = 'error-message';
+        errorMessageElement.textContent = message;
+        element.parentNode.insertBefore(errorMessageElement, element.nextSibling);
+      }
+      errorMessageElement.style.display = 'contents';
+    }
+
+    function resetErrorMessage(element) {
+      element.classList.remove('error');
+      let errorMessageElement = element.nextElementSibling;
+      if (errorMessageElement && errorMessageElement.classList.contains('error-message')) {
+        errorMessageElement.style.display = 'none';
+      }
+    }
+
+    function showSuccessMessage(message) {
+      const successMessageElement = document.getElementById('successMessage');
+      showAlertMessage(message, successMessageElement);
+    }
+
+    function showErrorMessage(message) {
+      const errorMessageElement = document.getElementById('errorMessage');
+      showAlertMessage(message, errorMessageElement);
+    }
+
+    function showLoadingButton() {
+      const buttonElement = document.getElementById('btn_submit_form');
+      const disabledButtonElement = document.getElementById('btn_disabled_submit_form');
+      buttonElement.classList.add('hidden');
+      disabledButtonElement.classList.remove('hidden');
+    }
+
+    function hideLoadingButton() {
+      const buttonElement = document.getElementById('btn_submit_form');
+      const disabledButtonElement = document.getElementById('btn_disabled_submit_form');
+      disabledButtonElement.classList.add('hidden');
+      buttonElement.classList.remove('hidden');
+    }
+
+    function showAlertMessage(message, messageElement) {
+      const textMessageElement = messageElement.querySelector('.message');
+      textMessageElement.textContent = message
+      messageElement.classList.remove('hidden');
+      setTimeout(function() {
+        messageElement.classList.add('hidden');
+      }, 5000);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const inputs = document.querySelectorAll('input, textarea');
+      inputs.forEach(function(input) {
+        input.addEventListener('input', function() {
+          resetErrorMessage(input);
+        });
+      });
+    });
+  </script>
+</body>
+</html> 

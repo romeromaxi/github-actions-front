@@ -1,0 +1,2 @@
+export const borderDashedSvg = (color: string, radius: number, strokeWidth: number = 1) =>
+    `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='99.6%25' height='97%25'%3E%3Crect x='1' y='1' width='99.3%25' height='97%25' rx='${radius}' ry='${radius}' fill='none' stroke='${encodeURIComponent(color)}' stroke-width='${strokeWidth}' stroke-dasharray='8 8' vector-effect='non-scaling-stroke' /%3E%3C/svg%3E")`;

@@ -1,0 +1,36 @@
+name: 🚧 Enable Maintenance Mode
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_env:
+        description: 'Selecciona el entorno para DESACTIVAR el sitio'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+jobs:
+  enable-maintenance:
+    name: Enable Maintenance on ${{ github.event.inputs.target_env }}
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.target_env }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Upload Maintenance Page
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./design/
+          server-dir: /
+          include: |
+            app_offline.htm
+          strip-components: 1
+          state-name: .maintenance-state

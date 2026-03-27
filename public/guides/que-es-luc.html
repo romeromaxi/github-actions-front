@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Qué es LUC?</title>
+    <link rel="stylesheet" href="/guides/styles.css">
+</head>
+<script>
+  function navigateTo(page) {
+    window.parent.postMessage({ type: 'navigate-instructivo-ayuda', page }, '*');
+  }
+
+  function notifyHeight() {
+    const height = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'resize-iframe-ayuda', height }, '*');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    notifyHeight();
+    
+    /*let currentPath = window.location.pathname.split('/').pop(); 
+    currentPath = currentPath.replace(/\.html$/, '');
+    document.querySelectorAll('.nav-links a').forEach((link) => {
+      let href = link.getAttribute('href').replace(/\.html$/, '');
+      if (href === currentPath) {
+          link.classList.add('nav-links-selected');
+      } else {
+          link.classList.remove('nav-links-selected');
+      }
+    });*/
+    
+    document.querySelectorAll('a[href$=".html"]').forEach((link) => {
+      const href = link.getAttribute('href');
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        navigateTo(href);
+      });
+    });
+
+    const resizeObserver = new ResizeObserver(() => {
+      notifyHeight();
+    });
+    resizeObserver.observe(document.body);
+
+
+    setTimeout(notifyHeight, 1000);
+  });
+  
+  window.addEventListener('load', notifyHeight);
+</script>
+
+<body>
+<header>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a class="nav-links-selected" href="que-es-luc.html">¿Qué es LUC?</a></li>
+            <li><a href="soluciones.html">Soluciones LUC</a></li>
+            <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+            <li><a href="instructivos.html">Instructivos</a></li>
+            <li><a href="contacto.html">Contactanos</a></li>
+        </ul>
+    </nav>
+</header>
+<main class="main-que-es-luc">
+    <section class="contenido que-es-luc-flex">
+        <div class="que-es-luc-texto">
+            <h1 class="main-title">¿Qué es LUC?</h1>
+            <p class="primer-parrafo">LUC es la plataforma que conecta a las MiPyMEs con las entidades financieras y de cobertura de riesgos, agilizando todo el proceso, para lograr que muchas más empresas encuentren de manera óptima, rápida y sencilla el financiamiento que necesitan. Es un nuevo modo de acceder al financiamiento asesorado, informado, y ágil.</p>
+            <p>LUC te ofrece herramientas para facilitar la búsqueda. En nuestra tienda podrás comparar los distintos productos, elegir e iniciar tu contacto con la entidad correspondiente. Desde ese primer contacto todo el trámite es más rápido y eficaz, ya que ellos cuentan con la información suficiente para responderte.</p>
+            <p>En LUC sos vos el que conoce y elige el financiamiento que necesita en cada oportunidad. Tanto buscando por productos como en las búsquedas asistidas. Dentro de las soluciones, LUC te brinda información que permite buscar y elegir alternativas más allá de lo conocido, ya que uno de nuestros propósitos es que cada decisión sea la óptima.</p>
+            <p>Conseguir financiamiento con LUC no tiene ningún costo adicional para tu empresa.</p>
+            <p>Podés aplicar a múltiples solicitudes con un solo legajo de contacto, que se completa mayoritariamente de manera automática con datos disponibles en BCRA y AFIP, y puede ser editado y actualizado para estar listo para futuras oportunidades.</p>
+            <p>Con LUC podés tener siempre ordenado y preparado el set de datos y documentos que las entidades solicitan a la hora de evaluar tu solicitud y utilizarlo para ser reutilizado dentro y fuera de la plataforma.</p>
+            <p>Completar tus datos te sirve también para ver cómo te ven quienes acceden a tu información habitualmente (clientes, proveedores, entidades financieras), dándote la posibilidad de utilizar esa información a tu favor. Siempre con la tranquilidad de que tus datos solo serán compartidos en caso de que envíes alguna solicitud.</p>
+            <p>No te pierdas la oportunidad de utilizar todas las soluciones que LUC trae para tu empresa. Registrate.</p>
+        </div>
+        <div class="que-es-luc-img">
+            <img src="img/queesluc.png" alt="¿Qué es LUC?" class="img-blur" style="width:100%; max-width:340px; border-radius:12px;">
+        </div>
+    </section>
+</main>
+</body>
+</html> 

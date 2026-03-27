@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instructivos</title>
+  <link rel="stylesheet" href="/guides/styles.css">
+</head>
+<script>
+  function navigateTo(page) {
+    window.parent.postMessage({ type: 'navigate-instructivo-ayuda', page }, '*');
+  }
+
+  function notifyHeight() {
+    const height = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'resize-iframe-ayuda', height }, '*');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    notifyHeight();
+
+    document.querySelectorAll('a[href$=".html"]').forEach((link) => {
+      const href = link.getAttribute('href');
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        navigateTo(href);
+      });
+    });
+
+    const resizeObserver = new ResizeObserver(() => {
+      notifyHeight();
+    });
+    resizeObserver.observe(document.body);
+
+
+    setTimeout(notifyHeight, 1000);
+  });
+
+  window.addEventListener('load', notifyHeight);
+</script>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="que-es-luc.html">¿Qué es LUC?</a></li>
+        <li><a href="soluciones.html">Soluciones LUC</a></li>
+        <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+        <li><a class="nav-links-selected" href="instructivos.html">Instructivos</a></li>
+        <li><a href="contacto.html">Contactanos</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="contenido">
+      <h1 class="main-title">Instructivos</h1>
+      <div class="videos-instructivos">
+        <!-- Fila 1 -->
+        <div class="fila-videos">
+          <div class="video-instructivo">
+            <div class="video-titulo">¿Cómo navegar en la tienda?</div>
+            <div class="video-embed">
+              <iframe width="100%" height="200" src="https://www.youtube.com/embed/ZvZdGlXANU4" title="¿Cómo navegar en la tienda?" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="video-instructivo">
+            <div class="video-titulo">¿Cómo crear tu usuario?</div>
+            <div class="video-embed">
+              <iframe width="100%" height="200" src="https://www.youtube.com/embed/qLS2qKC7ypU" title="¿Cómo crear tu usuario?" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="video-instructivo">
+            <div class="video-titulo">¿Cómo validar tu identidad?</div>
+            <div class="video-embed">
+              <iframe width="100%" height="200" src="https://www.youtube.com/embed/n12WFTcyoCI" title="¿Cómo validar tu identidad?" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+        <!-- Fila 2 -->
+        <div class="fila-videos">
+          <div class="video-instructivo">
+            <div class="video-titulo">Vincular una cuenta MiPyME (Monotributisas/Autónomos)?</div>
+            <div class="video-embed">
+              <iframe width="100%" height="200" src="https://www.youtube.com/embed/SfHrW1pJm80" title="Vincular una cuenta MiPyME (Monotributisas/Autónomos)?" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="video-instructivo">
+            <div class="video-titulo">Vincular una cuenta MiPyME para Personas Jurídicas</div>
+            <div class="video-embed">
+              <iframe width="100%" height="200" src="https://www.youtube.com/embed/z_WAIJLBlbQ" title="Vincular una cuenta MiPyME para Personas Jurídicas" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="video-instructivo">
+            <div class="video-titulo">Enviar una solicitud de financiamiento</div>
+            <div class="video-embed">
+              <iframe width="100%" height="200" src="https://www.youtube.com/embed/Ih6rlTVDDLY" title="Enviar una solicitud de financiamiento" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+        <!-- Fila 3 -->
+        <div class="fila-videos">
+          <div class="video-instructivo">
+            <div class="video-titulo">Suite de Herramientas para tu MiPyME</div>
+            <div class="video-embed">
+              <iframe width="100%" height="200" src="https://www.youtube.com/embed/20bGlKb0ZwM" title="Suite de Herramientas para tu MiPyME" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html> 
