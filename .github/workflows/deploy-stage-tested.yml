@@ -11,20 +11,11 @@ on:
 
 jobs:
   deploy-stage:
-    # Solo permite que el Job se cree si la rama seleccionada en "Use workflow from" es 'stage'
-    if: github.ref == 'refs/heads/stage'
     runs-on: ubuntu-latest
     # Vinculamos con el entorno de GitHub para usar las secrets correspondientes
     environment: staging
     
     steps:
-      - name: Validar rama de ejecución
-        if: github.ref != 'refs/heads/stage'
-        run: |
-          echo "❌ ERROR: Este deploy solo está permitido desde la rama 'stage'."
-          echo "Seleccionaste: ${{ github.ref }}"
-          exit 1
-
       - name: Checkout code
         uses: actions/checkout@v4
 
