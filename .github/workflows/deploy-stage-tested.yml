@@ -33,7 +33,7 @@ jobs:
       - name: Inyectar Scripts con Perl
         env:
           SCRIPTS_CONTENT: ${{ secrets.INDEX_POST_BUILD_SCRIPTS }}
-          SEARCH: "<!--INDEX_POST_BUILD_SCRIPTS-->"
+          SEARCH: '<script id="index-post-build-scripts"></script>'
         run: |
           perl -i -0777 -pe 's/$ENV{SEARCH}/$ENV{SCRIPTS_CONTENT}/g' build/index.html
     
