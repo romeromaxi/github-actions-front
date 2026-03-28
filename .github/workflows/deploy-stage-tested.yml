@@ -29,14 +29,14 @@ jobs:
 
       - name: Unzip Front artifact
         run: unzip front-${{ inputs.version }}.zip
-
-      - name: Inject Analytics Scripts
+        
+      - name: Inyectar Scripts con Perl
         env:
           SCRIPTS_CONTENT: ${{ secrets.INDEX_POST_BUILD_SCRIPTS }}
+          SEARCH: "<!--INDEX_POST_BUILD_SCRIPTS-->"
         run: |
-          ESCAPED=$(printf '%s\n' "$SCRIPTS_CONTENT" | sed "s/[&\\]/\\\&/g; s/|/\\|/g")
-          sed -i "s|<!--INDEX_POST_BUILD_SCRIPTS-->|${ESCAPED}|g" index.html
-
+          perl -i -0777 -pe 's/$ENV{SEARCH}/$ENV{SCRIPTS_CONTENT}/g' index.html
+    
       - name: Deploy Test File to Stage
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
