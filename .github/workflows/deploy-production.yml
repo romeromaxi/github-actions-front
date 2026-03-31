@@ -59,8 +59,15 @@ jobs:
           rm -f ./build/configuration.js
           rm -f ./build/manifest.json
           rm -f ./build/web.config
+
+      - name: 🔍 Inject Google Site Verification
+        env:
+          SCRIPTS_CONTENT: ${{ secrets.INDEX_GOOGLE_SITE_VERIFICATION }}
+          SEARCH: 'google-site-verification-post-build'
+        run: |
+          perl -i -0777 -pe 's/$ENV{SEARCH}/$ENV{SCRIPTS_CONTENT}/g' build/index.html
             
-      - name: Inject Analytics Scripts
+      - name: 📊 Inject Analytics Scripts
         env:
           SCRIPTS_CONTENT: ${{ secrets.INDEX_POST_BUILD_SCRIPTS }}
         run: |
@@ -80,15 +87,3 @@ jobs:
           target-path: ''
           # NO BORRAR: Mucho muy importante (sin esta linea de abajo te borra todo el contenido del server)
           clean: false
-          
-      - name: Deploy Front to Production
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./build/
-          server-dir: /
-          exclude: |
-            **/configuration.js
-            **/manifest.json
