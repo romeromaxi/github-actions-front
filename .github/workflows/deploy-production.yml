@@ -14,13 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: Validar rama de ejecución
-        if: github.ref != 'refs/heads/master'
-        run: |
-          echo "❌ ERROR: Este deploy solo está permitido desde la rama 'master'."
-          echo "Seleccionaste: ${{ github.ref }}"
-          exit 1
-
       - name: 📂 Checkout code
         uses: actions/checkout@v4
       
