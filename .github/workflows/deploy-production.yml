@@ -66,17 +66,13 @@ jobs:
           SEARCH: 'google-site-verification-post-build'
         run: |
           perl -i -0777 -pe 's/$ENV{SEARCH}/$ENV{SCRIPTS_CONTENT}/g' build/index.html
-            
-      - name: 📊 Inject Analytics Scripts
+        
+      - name: 📊 Inject Analytics Scripts with Perl
         env:
           SCRIPTS_CONTENT: ${{ secrets.INDEX_POST_BUILD_SCRIPTS }}
+          SEARCH: '<script id="index-post-build-scripts"></script>'
         run: |
-          echo "$SCRIPTS_CONTENT" > post_build_scripts_snippet.txt
-          
-          perl -i -pe 'BEGIN{undef $/;} s//`cat post_build_scripts_snippet.txt`/ge' build/index.html
-          
-          rm post_build_scripts_snippet.txt
-          echo "✅ Scripts Post-Build inyectados correctamente."
+          perl -i -0777 -pe 's/$ENV{SEARCH}/$ENV{SCRIPTS_CONTENT}/g' build/index.html
           
       - name: 🚀 Deploy Front to Production
         uses: azure/webapps-deploy@v3
