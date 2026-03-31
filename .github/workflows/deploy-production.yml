@@ -11,7 +11,6 @@ on:
         
 jobs:
   enable-maintenance:
-    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -22,42 +21,35 @@ jobs:
           echo "Seleccionaste: ${{ github.ref }}"
           exit 1
 
-      - name: Checkout code
+      - name: 📂 Checkout code
         uses: actions/checkout@v4
-
-      - name: Upload Maintenance Page
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      
+      - name: 📝 Prepare Maintenance Page
+        run: |
+          mkdir ./maintenance_only
+          cp ./design/sites/app_offline.htm ./maintenance_only/
+          
+      - name: 🚧 Upload Maintenance Page
+        uses: azure/webapps-deploy@v3
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./design/
-          server-dir: /
-          include: |
-            app_offline.htm
-          strip-components: 1
-          state-name: .maintenance-state
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: './maintenance_only'
+          target-path: ''
+          # NO BORRAR: Mucho muy importante (sin esta linea de abajo te borra todo el contenido del server)
+          clean: false
           
   deploy-production:
-    # Solo permite que el Job se cree si la rama seleccionada en "Use workflow from" es 'master'
-    if: github.ref == 'refs/heads/master'
     needs: enable-maintenance
     runs-on: ubuntu-latest
     # Vinculamos con el entorno de GitHub para usar las secrets correspondientes
     environment: production
     
-    steps:
-      - name: Validar rama de ejecución
-        if: github.ref != 'refs/heads/master'
-        run: |
-          echo "❌ ERROR: Este deploy solo está permitido desde la rama 'master'."
-          echo "Seleccionaste: ${{ github.ref }}"
-          exit 1
-            
-      - name: Checkout code
+    steps:            
+      - name: 📂 Checkout code
         uses: actions/checkout@v4
         
-      - name: Download Front release asset
+      - name: ☁️ Download Front release asset
         run: |
           gh release download ${{ inputs.version }} \
             --pattern "front-${{ inputs.version }}.zip" \
@@ -65,9 +57,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
-      - name: Unzip Front artifact
+      - name: 🔓 Unzip Front artifact
         run: unzip front-${{ inputs.version }}.zip
-        
+
+      # Se exluyen archivos que no se deben pisar
+      - name: 🧹 Clean and Filter Package
+        run: |
+          rm -f ./build/configuration.js
+          rm -f ./build/manifest.json
+          rm -f ./build/web.config
+            
       - name: Inject Analytics Scripts
         env:
           SCRIPTS_CONTENT: ${{ secrets.INDEX_POST_BUILD_SCRIPTS }}
@@ -78,7 +77,17 @@ jobs:
           
           rm post_build_scripts_snippet.txt
           echo "✅ Scripts Post-Build inyectados correctamente."
-            
+          
+      - name: 🚀 Deploy Front to Production
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ./build
+          target-path: ''
+          # NO BORRAR: Mucho muy importante (sin esta linea de abajo te borra todo el contenido del server)
+          clean: false
+          
       - name: Deploy Front to Production
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
